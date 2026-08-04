@@ -2,7 +2,7 @@ backend:
   name: github
   repo: homeautoak-svg/cali-diaries1
   branch: main
-  base_url: https://cali-diaries1.pages.dev
+  base_url: https://cali-diaries1.homeauto-ak.workers.dev
   auth_endpoint: api/auth
 
 # Sobald die eigene Domain eingerichtet ist, base_url hier anpassen
