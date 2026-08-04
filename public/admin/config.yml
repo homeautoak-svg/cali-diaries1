@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: homeautoak-svg/cali-diaries1
+  branch: main
+  base_url: https://cali-diaries1.pages.dev
+  auth_endpoint: api/auth
+
+# Sobald die eigene Domain eingerichtet ist, base_url hier anpassen
+# (z.B. https://unterwegs-california.ch), UND im GitHub OAuth App die
+# Callback-URL entsprechend ergänzen (siehe README).
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "post"
+    label: "Beiträge"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Ort", name: "ort", widget: "string" }
+      - { label: "Datum (Anzeige, z.B. 12-Okt-2025)", name: "datum", widget: "string" }
+      - { label: "Datum (für Sortierung)", name: "datum_sort", widget: "date", date_format: "YYYY-MM-DD" }
+      - { label: "Anzahl Nächte", name: "naechte", widget: "number", required: false }
+      - { label: "Kurztext für die Startseiten-Karte", name: "excerpt", widget: "text" }
+      - { label: "Titelbild", name: "hero_bild", widget: "image", required: false }
+      - { label: "Fotostreifen", name: "fotos", widget: "list", field: { label: "Foto", name: "foto", widget: "image" }, required: false }
+      - { label: "Text", name: "body", widget: "markdown" }

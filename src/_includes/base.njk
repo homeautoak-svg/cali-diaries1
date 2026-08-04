@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} – Unterwegs mit dem California</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="contour-bg">
+
+<header class="site-header">
+  <div class="eyebrow">VW T7 California · Andy &amp; Sarah</div>
+  <h1><a href="/">Unterwegs mit dem California</a></h1>
+  {% if tagline %}<p class="tagline">{{ tagline }}</p>{% endif %}
+</header>
+
+<main>
+  {{ content | safe }}
+</main>
+
+</body>
+</html>

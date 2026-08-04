@@ -1,0 +1,20 @@
+---
+layout: base.njk
+title: Startseite
+tagline: "Stellplätze, Umwege und Lessons Learnt aus unseren Trips durch die Schweiz und darüber hinaus."
+---
+<div class="post-grid">
+  {% for post in collections.posts %}
+  <a class="post-card" href="{{ post.url }}">
+    <div class="thumb" data-placeholder-label="Foto folgt">
+      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title }}">{% endif %}
+    </div>
+    <div class="body">
+      <div class="meta">{{ post.data.datum }} · {{ post.data.ort }}</div>
+      <h2>{{ post.data.title }}</h2>
+      <p class="excerpt">{{ post.data.excerpt }}</p>
+      <span class="read-more">Beitrag lesen →</span>
+    </div>
+  </a>
+  {% endfor %}
+</div>
