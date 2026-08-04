@@ -1,14 +1,13 @@
 ---
-layout: post.njk
-title: Ein Wochenende im Herbstnebel
+title: TE Ein Wochenende im Herbstnebel
+ort: Graubünden
 datum: 12-Okt-2025
 datum_sort: 2025-10-12
-ort: Graubünden
 naechte: 2
-excerpt: >-
-  Kurzfristig umdisponiert wegen Schnee auf dem Pass, dafür einen
+excerpt: Kurzfristig umdisponiert wegen Schnee auf dem Pass, dafür einen
   Stellplatz gefunden, der es in sich hatte.
 hero_bild: ""
+layout: post.njk
 fotos: []
 ---
 Der Wetterbericht hatte für den Pass Schnee angekündigt, also haben wir die Route kurzfristig umgeplant und sind stattdessen ins Tal ausgewichen. Rückblickend war das die richtige Entscheidung: weniger Verkehr, ruhigere Stellplätze und ein Nebel am Morgen, der die ganze Landschaft in ein gedämpftes Licht getaucht hat.
