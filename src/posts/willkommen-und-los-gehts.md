@@ -1,12 +1,13 @@
 ---
-title: "Willkommen und los geht's"
-ort: "Daheim"
-datum: "05-Aug-2026"
+title: Willkommen und los geht's
+ort: Daheim
+datum: 05-Aug-2026
 datum_sort: 2026-08-05
-naechte:
-excerpt: "Wer wir sind, warum wir uns für zwei Jahre einen California geleast haben und was wir mit diesem Blog vorhaben."
-hero_bild:
-fotos:
+naechte: null
+excerpt: Wer wir sind, warum wir uns für zwei Jahre einen California geleast
+  haben und was wir mit diesem Blog vorhaben.
+hero_bild: /images/img_3923.jpg
+fotos: null
 ---
 
 Wir sind Andy und Sarah, wohnhaft in der Schweiz, und seit Kurzem stolze Fahrer eines VW T7 California. Zwei Jahre haben wir uns Zeit gegeben, um herauszufinden, ob uns das Campingleben liegt, und die ersten Ausfahrten haben diese Frage schon ziemlich eindeutig beantwortet.
