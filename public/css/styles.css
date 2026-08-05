@@ -230,6 +230,44 @@ main {
   display: block;
 }
 
+.post-detail .photo-strip .photo {
+  cursor: zoom-in;
+}
+
+/* -------------------- Lightbox -------------------- */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 58, 46, 0.9);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  color: var(--birke);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }

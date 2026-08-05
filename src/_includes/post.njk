@@ -23,7 +23,13 @@ layout: base.njk
   {% if fotos %}
   <div class="photo-strip">
     {% for foto in fotos %}
-    <div class="photo"><img src="{{ foto }}" alt=""></div>
+    <div class="photo" onclick="document.getElementById('lightbox-{{ loop.index }}').classList.add('open')">
+      <img src="{{ foto }}" alt="">
+    </div>
+    <div class="lightbox" id="lightbox-{{ loop.index }}" onclick="this.classList.remove('open')">
+      <img src="{{ foto }}" alt="">
+      <span class="lightbox-close">&times;</span>
+    </div>
     {% endfor %}
   </div>
   {% endif %}
