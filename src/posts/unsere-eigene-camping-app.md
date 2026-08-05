@@ -7,7 +7,12 @@ naechte: null
 excerpt: Warum wir uns ein eigenes Logbuch für unsere Trips gebaut haben und was
   es alles kann.
 hero_bild: /images/img_4080.png
-fotos: []
+fotos:
+  - /images/img_4085.png
+  - /images/img_4084.png
+  - /images/img_4082.png
+  - /images/img_4081.png
+  - /images/img_4080.png
 ---
 Neben diesem Blog gibt es noch ein zweites Projekt, das im Hintergrund läuft und eigentlich erst den Anstoss für alles andere gegeben hat: unser privates Camping-Logbuch. Eine App, die wir für uns selbst gebaut haben, um unsere Trips mit dem California festzuhalten und zu planen.
 
@@ -18,15 +23,3 @@ Besonders nützlich ist die Sammlung aller Lessons Learnt über alle Trips hinwe
 Dazu kommen ein paar praktische Werkzeuge: der Kilometerstand mit Jahresbudget passend zum Leasingvertrag, der Service- und Reparaturverlauf für das Fahrzeug, eine Finanzübersicht mit Fixkosten und automatisch übernommenen variablen Ausgaben, sowie eine Karte, auf der alle bisherigen Stellplätze verzeichnet sind.
 
 Für uns ist die App inzwischen fester Bestandteil jeder Reise geworden, vom ersten Planungsschritt bis zum Rückblick danach.
-
-![](/images/img_4080.png)
-
-![](/images/img_4081.png)
-
-![](/images/img_4082.png)
-
-
-
-![](/images/img_4084.png)
-
-![](/images/img_4085.png)
