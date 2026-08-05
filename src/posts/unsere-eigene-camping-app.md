@@ -1,12 +1,17 @@
 ---
-title: "Unsere eigene Camping-App"
-ort: "Daheim"
-datum: "05-Aug-2026"
+title: Unsere eigene Camping-App
+ort: Daheim
+datum: 05-Aug-2026
 datum_sort: 2026-08-05
-naechte:
-excerpt: "Warum wir uns ein eigenes Logbuch für unsere Trips gebaut haben und was es alles kann."
-hero_bild:
+naechte: null
+excerpt: Warum wir uns ein eigenes Logbuch für unsere Trips gebaut haben und was
+  es alles kann.
+hero_bild: /images/img_4080.png
 fotos:
+  - /images/img_4083.png
+  - /images/img_4083.png
+  - /images/img_4082.png
+  - /images/img_4081.png
 ---
 
 Neben diesem Blog gibt es noch ein zweites Projekt, das im Hintergrund läuft und eigentlich erst den Anstoss für alles andere gegeben hat: unser privates Camping-Logbuch. Eine App, die wir für uns selbst gebaut haben, um unsere Trips mit dem California festzuhalten und zu planen.
