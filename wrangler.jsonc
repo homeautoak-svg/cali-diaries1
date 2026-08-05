@@ -3,9 +3,12 @@
   "name": "cali-diaries1",
   "compatibility_date": "2026-08-01",
   "main": "src-worker/index.js",
+  "vars": {
+    "GITHUB_CLIENT_ID": "Ov23liU4ib9wSWPyVsdm"
+  },
   "assets": {
     "directory": "./_site",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": true
   }
 }
