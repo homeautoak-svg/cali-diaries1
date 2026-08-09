@@ -4,8 +4,8 @@ ort: Sempach TCS
 datum: 07-Aug-2026
 datum_sort: 2026-08-07
 naechte: 2
-excerpt: Ein entspannter Kurztrip auf den TCS Campingplatz Sempach – mit
-  geraeumigem Stellplatz, Eiswagen und Livemusik am Abend.
+excerpt: "Ein entspannter Kurztrip auf den TCS Campingplatz Sempach: mit
+  geräumigem Stellplatz, Eiswagen und Livemusik am Abend."
 hero_bild: /images/1786303763998-5917819.jpeg
 fotos:
   - foto: /images/1786303763781-670445408.jpeg
