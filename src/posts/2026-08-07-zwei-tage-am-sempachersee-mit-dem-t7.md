@@ -1,24 +1,24 @@
 ---
-title: "Zwei Tage am Sempachersee mit dem T7"
-ort: "Sempach TCS"
-datum: "07-Aug-2026"
-datum_sort: "2026-08-07"
+title: Zwei Tage am Sempachersee mit dem T7
+ort: Sempach TCS
+datum: 07-Aug-2026
+datum_sort: 2026-08-07
 naechte: 2
-excerpt: "Ein entspannter Kurztrip auf den TCS Campingplatz Sempach – mit geraeumigem Stellplatz, Eiswagen und Livemusik am Abend."
-hero_bild: "/images/1786303763998-5917819.jpeg"
+excerpt: Ein entspannter Kurztrip auf den TCS Campingplatz Sempach – mit
+  geraeumigem Stellplatz, Eiswagen und Livemusik am Abend.
+hero_bild: /images/1786303763998-5917819.jpeg
 fotos:
-  - foto: "/images/1786303763781-670445408.jpeg"
-  - foto: "/images/1786303763121-930352746.jpeg"
+  - foto: /images/1786303763781-670445408.jpeg
+  - foto: /images/1786303763121-930352746.jpeg
 ---
+Von Freitag bis Sonntag haben wir es uns auf dem TCS Campingplatz in Sempach gemütlich gemacht. Der Stellplatz war schön geräumig, sodass unser T7 California genug Platz zum Ausklappen hatte und wir uns nicht eingeengt gefühlt haben.
 
-Vom 7. bis 9. August 2026 haben wir es uns auf dem TCS Campingplatz in Sempach gutgehen lassen. Der Platz liegt direkt am See und war genau das, was wir fuer ein kurzes Wochenende gebraucht haben. Insgesamt wuerde ich dem Platz 4 von 5 Sternen geben.
+Der Platz liegt direkt am See, was natürlich ein grosses Plus ist. Für den Alltag war auch praktisch, dass ein Coop in gehbarer Distanz liegt, allerdings hat er am Samstag nur bis 17.00 Uhr offen, das sollte man einplanen. Auf dem Campingplatz selbst gibt es einen netten Eiswagen, bei dem wir uns Eiskaffee, Waffeln und natürlich Eis geschmeckt haben.
 
-Das Wetter war bedeckt, aber mit angenehmen 26 Grad tagsueber liess es sich gut aushalten. Unser Stellplatz war schoen geraeumig, sodass wir mit dem T7 California genug Platz zum Rangieren und Sitzen hatten. Pro Nacht haben wir CHF 73.60 bezahlt, was fuer die Lage und Ausstattung fair war.
+Abends waren wir im Restaurant auf dem Platz, dort gab es Livemusik, was für eine schöne Stimmung gesorgt hat. Kulinarisch war es gutbürgerliche Kost, es gab aber auch eine Salatbar für alle, die es etwas leichter wollten. Für das Abendessen haben wir zusammen rund CHF 55 ausgegeben.
 
-Ein echtes Highlight war der Eiswagen direkt auf dem Platz. Eiskaffee, Waffeln und Eis, da konnte ich einfach nicht widerstehen. Auch das Restaurant vor Ort hat uns gefallen: gutbuergerliche Kost, dazu eine Salatbar fuer alle, die es etwas leichter mochten. Am Abend gab es sogar Live Musik, was fuer eine schoene Stimmung gesorgt hat. Fuer das Nachtessen haben wir zusammen rund CHF 55 ausgegeben.
+Insgesamt würde ich den Platz mit 4 von 5 Punkten bewerten. Für eine Nacht haben wir CHF 73.60 bezahlt, was für die Lage am See und die gute Infrastruktur (WIFI, Restaurant, Supermarkt in der Nähe) absolut in Ordnung ist.
 
-Praktisch war auch, dass ein Coop in gehbarer Distanz lag. Einziger Wermutstropfen: Samstags hat er nur bis 17 Uhr geoeffnet, also rechtzeitig einkaufen gehen! WIFI war ebenfalls vorhanden, falls man mal kurz online muss.
+Ein paar Dinge nehme ich als Lessons Learnt mit für das nächste Mal: Auch im August kann es nachts auf etwa 10 Grad runterkühlen, deshalb sollte man unbedingt zusätzliche Decken mitnehmen. Ausserdem war es mühsam, keinen leeren Rucksack für Ausflüge und Badis dabei zu haben, das packe ich das nächste Mal fest ein. Und last but not least: Lampen einpacken, gerade wenn man abends noch draussen sitzen will oder mal etwas im Dunkeln suchen muss.
 
-Was ich aus diesem Trip mitnehme: Nachts wurde es mit rund 10 Grad ueberraschend kuehl, da lohnt es sich definitiv, ein paar zusaetzliche Decken einzupacken. Ausserdem war ich froh, dass ich an einen leeren Rucksack gedacht hatte: perfekt fuer spontane Ausfluege oder einen Sprung in die Badi. Und last but not least: Lampen nicht vergessen, wenn es abends dunkel wird, freut man sich ueber ein bisschen Licht am Platz.
-
-Alles in allem war Sempach ein rundum gelungenes Wochenende: See, gutes Essen, ein feines Eis und entspanntes Campingfeeling. Definitiv ein Platz, den ich fuer einen kurzen Zwischenstopp oder ein entspanntes Wochenende weiterempfehlen kann.
+Alles in allem war es ein entspannter Kurztrip an den Sempachersee, den ich gerne wieder machen würde.
