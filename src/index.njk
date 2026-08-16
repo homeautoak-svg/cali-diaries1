@@ -4,7 +4,8 @@ title: Startseite
 tagline: "Stellplätze, Umwege und Lessons Learnt aus unseren Trips durch die Schweiz und darüber hinaus."
 ---
 <div class="post-grid">
-  {% for post in collections.posts %}
+{% set sortedPosts = collections.posts | sort(attribute='data.datum_sort', reverse=true) %}
+{% for post in sortedPosts %}
   <a class="post-card" href="{{ post.url }}">
     <div class="thumb" data-placeholder-label="Foto folgt">
       {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title }}">{% endif %}
