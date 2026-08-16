@@ -2,24 +2,23 @@
 layout: base.njk
 ---
 <a class="back-link" href="/">← Zurück zur Übersicht</a>
-
 <article class="post-detail">
   <div class="post-hero" data-placeholder-label="Foto folgt">
     {% if hero_bild %}<img src="{{ hero_bild }}" alt="{{ title }}">{% endif %}
   </div>
-
   <div class="meta-row">
     <span>{{ datum }}</span>
     <span>{{ ort }}</span>
     {% if naechte %}<span>{{ naechte }} Nächte</span>{% endif %}
   </div>
-
+  <div class="meta-row meta-row-secondary">
+    {% if campingplatz %}<span>{{ campingplatz }}</span>{% endif %}
+    {% if kosten_gesamt %}<span>CHF {{ kosten_gesamt }}</span>{% endif %}
+  </div>
   <h1>{{ title }}</h1>
-
   <div class="content">
     {{ content | safe }}
   </div>
-
   {% if fotos %}
   <div class="photo-strip">
     {% for foto in fotos %}
@@ -30,6 +29,13 @@ layout: base.njk
       <img src="{{ foto.foto }}" alt="">
       <span class="lightbox-close">&times;</span>
     </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if tags %}
+  <div class="tag-list">
+    {% for tag in tags %}
+    <span class="tag-chip">{{ tag }}</span>
     {% endfor %}
   </div>
   {% endif %}
