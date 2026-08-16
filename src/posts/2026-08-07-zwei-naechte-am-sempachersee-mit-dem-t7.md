@@ -2,7 +2,7 @@
 title: "Zwei Nächte am Sempachersee mit dem T7"
 ort: "Sempach TCS"
 datum: "07-Aug-2026"
-datum_sort: "2026-08-07"
+datum_sort: 2026-08-07
 naechte: 2
 excerpt: "Ein entspanntes Wochenende auf dem TCS Campingplatz in Sempach, mit Seeblick, Livemusik und einem Eiswagen, der uns fast öfter besucht hat als der See selbst."
 hero_bild: "/images/1786303763998-5917819.jpeg"
