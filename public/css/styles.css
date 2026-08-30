@@ -316,3 +316,29 @@ main {
   border-radius: 999px;
   padding: 0.3rem 0.9rem;
 }
+
+/* -------------------- Header-Navigation -------------------- */
+
+.site-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.75rem;
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(244, 236, 221, 0.2);
+}
+
+.site-nav a {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--lagerfeuer);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.site-nav a:hover {
+  opacity: 1;
+}

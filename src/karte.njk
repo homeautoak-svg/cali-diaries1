@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: Karte
+permalink: /karte/
+---
+<h1>Unsere Stellplätze</h1>
+
+<div id="karte" style="height: 70vh; border-radius: 8px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const orte = {{ collections.orte | dump | safe }};
+
+  const map = L.map('karte').setView([46.8, 8.3], 8);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap-Mitwirkende'
+  }).addTo(map);
+
+  orte.forEach(o => {
+    L.marker([o.lat, o.lon])
+      .addTo(map)
+      .bindPopup(`<strong><a href="${o.url}">${o.titel}</a></strong><br>${o.ort}<br>${o.datum}`);
+  });
+</script>
