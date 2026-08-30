@@ -1,5 +1,5 @@
 ---
-title: "Vier Tage am See: Campingplatz Allensbach im Wechselbad der Gefühle"
+title: "Vier Tage am See: Campingplatz Allensbach im Wetterwechsel"
 campingplatz: "Campingplatz Allensbach"
 ort: "Campingplatz Allensbach"
 datum: "27-Aug-2026"
