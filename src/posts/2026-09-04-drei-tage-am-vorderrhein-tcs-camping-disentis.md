@@ -1,5 +1,5 @@
 ---
-title: "Drei Tage am Vorderrhein: TCS Camping Disentis"
+title: "Zwei kalte Nächte am Vorderrhein in Disentis"
 campingplatz: "TCS Camping Disentis"
 ort: "Disentis"
 datum: "04-Sep-2026"
