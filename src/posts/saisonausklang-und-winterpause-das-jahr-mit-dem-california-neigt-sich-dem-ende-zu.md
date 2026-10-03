@@ -3,6 +3,7 @@ title: "Saisonausklang und Winterpause: Das Jahr mit dem California neigt sich
   dem Ende zu"
 ort: Zu Hause
 datum: 03-Oct-2026
+datum_sort: 2026-10-03
 excerpt: Eine Saison voller Abenteuer geht zu Ende. Acht Trips, unzählige
   Stellplätze, und am Ende eine Delle in der Seitenplanke. Ein Rückblick auf die
   Highlights und ein Ausblick auf die Winterpause.
