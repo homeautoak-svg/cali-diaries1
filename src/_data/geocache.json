@@ -1,1 +1,26 @@
-{}
+{
+  "Sempach TCS": {
+    "lat": 47.124,
+    "lon": 8.188
+  },
+  "Lindau (Bodensee)": {
+    "lat": 47.573,
+    "lon": 9.696
+  },
+  "Campingplatz Allensbach": {
+    "lat": 47.71,
+    "lon": 9.08
+  },
+  "Disentis": {
+    "lat": 46.705,
+    "lon": 8.855
+  },
+  "Kreuzlingen": {
+    "lat": 47.646,
+    "lon": 9.173
+  },
+  "Feriolo di Baveno": {
+    "lat": 45.928,
+    "lon": 8.481
+  }
+}

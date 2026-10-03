@@ -3,22 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }} – Unterwegs mit dem California</title>
+{%- set isHome = page.url == "/" %}
+{%- set pageTitle = site.name if isHome else (title ~ " – " ~ site.name) %}
+{%- set pageDescription = excerpt or tagline or site.description %}
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDescription | escape }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:locale" content="de_CH">
+<meta property="og:type" content="{{ 'article' if hero_bild else 'website' }}">
+<meta property="og:title" content="{{ (title if not isHome else site.name) | escape }}">
+<meta property="og:description" content="{{ pageDescription | escape }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+{%- set ogBild = hero_bild or (collections.posts[0].data.hero_bild if isHome) %}
+{%- if ogBild %}
+<meta property="og:image" content="{{ site.url }}{{ ogBild }}">
+<meta name="twitter:card" content="summary_large_image">
+{%- endif %}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap">
 <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="contour-bg">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
+{% if isHome %}
 <header class="site-header">
   <div class="eyebrow">VW T7 California · Andy &amp; Sarah</div>
-  <h1><a href="/">Unterwegs mit dem California</a></h1>
+  <h1><a href="/">{{ site.name }}</a></h1>
   {% if tagline %}<p class="tagline">{{ tagline }}</p>{% endif %}
-  <nav class="site-nav">
-    <a href="/">Beiträge</a>
-    <a href="/karte/">Karte</a>
-    <a href="/kontakt/">Kontakt</a>
-  </nav>
+  {% include "nav.njk" %}
 </header>
+{% else %}
+<header class="site-header site-header--compact">
+  <a class="site-title" href="/">{{ site.name }}</a>
+  {% include "nav.njk" %}
+</header>
+{% endif %}
 
 <main>
   {{ content | safe }}
