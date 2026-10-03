@@ -1,42 +1,63 @@
 ---
 layout: base.njk
 ---
-<a class="back-link" href="/">← Zurück zur Übersicht</a>
+<a class="back-link" href="/">← Alle Beiträge</a>
 <article class="post-detail">
   <div class="post-hero" data-placeholder-label="Foto folgt">
-    {% if hero_bild %}<img src="{{ hero_bild }}" alt="{{ title }}">{% endif %}
+    {% if hero_bild %}<img src="{{ hero_bild }}" alt="{{ title | escape }}" sizes="(min-width: 56rem) 53rem, 100vw" data-eager>{% endif %}
   </div>
-  <div class="meta-row">
+  <div class="post-kicker">
     <span>{{ datum }}</span>
-    <span>{{ ort }}</span>
-    {% if naechte %}<span>{{ naechte }} Nächte</span>{% endif %}
-  </div>
-  <div class="meta-row meta-row-secondary">
-    {% if campingplatz %}<span>{{ campingplatz }}</span>{% endif %}
-    {% if kosten_gesamt %}<span>CHF {{ kosten_gesamt }}</span>{% endif %}
+    {% if ort %}<span>{{ ort }}</span>{% endif %}
   </div>
   <h1>{{ title }}</h1>
+
+  {% if campingplatz or naechte or kosten_gesamt %}
+  <dl class="fact-box">
+    {% if campingplatz %}<div><dt>Campingplatz</dt><dd>{{ campingplatz }}</dd></div>{% endif %}
+    {% if naechte %}<div><dt>Dauer</dt><dd>{{ naechte }} {{ "Nacht" if naechte == 1 else "Nächte" }}</dd></div>{% endif %}
+    {% if kosten_gesamt %}<div><dt>Kosten total</dt><dd>CHF {{ kosten_gesamt | chf }}</dd></div>{% endif %}
+  </dl>
+  {% endif %}
+
   <div class="content">
     {{ content | safe }}
   </div>
+
   {% if fotos %}
   <div class="photo-strip">
-    {% for foto in fotos %}
-    <div class="photo" onclick="document.getElementById('lightbox-{{ loop.index }}').classList.add('open')">
-      <img src="{{ foto.foto }}" alt="">
-    </div>
+    {% for foto in fotos %}{% if foto.foto != hero_bild %}
+    <button type="button" class="photo" aria-label="Foto {{ loop.index }} vergrössern" onclick="document.getElementById('lightbox-{{ loop.index }}').classList.add('open')">
+      <img src="{{ foto.foto }}" alt="" sizes="(min-width: 56rem) 13rem, 45vw">
+    </button>
     <div class="lightbox" id="lightbox-{{ loop.index }}" onclick="this.classList.remove('open')">
-      <img src="{{ foto.foto }}" alt="">
-      <span class="lightbox-close">&times;</span>
+      <img src="{{ foto.foto }}" alt="" sizes="90vw">
+      <span class="lightbox-close" aria-hidden="true">&times;</span>
     </div>
-    {% endfor %}
+    {% endif %}{% endfor %}
   </div>
+  <script>
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") document.querySelectorAll(".lightbox.open").forEach((el) => el.classList.remove("open"));
+    });
+  </script>
   {% endif %}
+
   {% if tags %}
-  <div class="tag-list">
-    {% for tag in tags %}
-    <span class="tag-chip">{{ tag }}</span>
-    {% endfor %}
-  </div>
+  <section class="amenities" aria-label="Ausstattung">
+    <h2>Ausstattung</h2>
+    <ul>
+      {% for tag in tags %}<li>{{ tag }}</li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% set newer = collections.posts | getPreviousCollectionItem %}
+  {% set older = collections.posts | getNextCollectionItem %}
+  {% if newer or older %}
+  <nav class="post-pager" aria-label="Weitere Beiträge">
+    {% if older %}<a class="older" href="{{ older.url }}"><span>Älterer Beitrag</span>{{ older.data.title }}</a>{% endif %}
+    {% if newer %}<a class="newer" href="{{ newer.url }}"><span>Neuerer Beitrag</span>{{ newer.data.title }}</a>{% endif %}
+  </nav>
   {% endif %}
 </article>
