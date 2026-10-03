@@ -6,16 +6,16 @@ tagline: "Stellplätze, Umwege und Lessons Learnt aus unseren Trips durch die Sc
 <div class="post-grid">
 {% set sortedPosts = collections.posts | sort(attribute='data.datum_sort', reverse=true) %}
 {% for post in sortedPosts %}
-  <a class="post-card" href="{{ post.url }}">
+  <a class="post-card{% if loop.first %} post-card--featured{% endif %}" href="{{ post.url }}">
     <div class="thumb" data-placeholder-label="Foto folgt">
-      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title }}">{% endif %}
+      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title | escape }}"{% if loop.first %} sizes="(min-width: 48rem) 32rem, 100vw" data-eager{% else %} sizes="(min-width: 56rem) 17rem, (min-width: 34rem) 50vw, 100vw"{% endif %}>{% endif %}
     </div>
     <div class="body">
       <div class="meta">{{ post.data.datum }} · {{ post.data.ort }}</div>
       <h2>{{ post.data.title }}</h2>
       <p class="excerpt">{{ post.data.excerpt }}</p>
-      <span class="read-more">Beitrag lesen →</span>
+      <span class="read-more">Beitrag lesen <span aria-hidden="true">→</span></span>
     </div>
   </a>
-  {% endfor %}
+{% endfor %}
 </div>

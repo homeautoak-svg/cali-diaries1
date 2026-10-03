@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap');
+/* Schriften werden in base.njk per <link> geladen (schneller als @import). */
 
 :root {
   --tanne: #1f3a2e;
@@ -7,6 +7,10 @@
   --birke: #f4ecdd;
   --rinde: #4a4237;
   --nebel: #d9d2c1;
+
+  /* Textvarianten mit ausreichendem Kontrast (WCAG AA, min. 4.5:1) */
+  --glut: #8f5a1c;          /* Akzenttext auf Weiss/Birke (5.8:1 / 4.9:1) */
+  --lagerfeuer-hell: #e3a75a; /* Akzenttext auf Tanne (5.8:1) */
 
   --font-display: 'Fraunces', serif;
   --font-body: 'Source Sans 3', sans-serif;
@@ -24,8 +28,7 @@ body {
 .contour-bg {
   background-image:
     radial-gradient(circle at 20% 20%, transparent 60px, transparent 61px),
-    repeating-radial-gradient(circle at 50% -10%, transparent 0, transparent 40px, rgba(74,107,82,0.05) 41px, rgba(74,107,82,0.05) 42px);
-  background-attachment: fixed;
+    repeating-radial-gradient(circle at 50% -10%, transparent 0, transparent 40px, rgba(74,107,82,0.03) 41px, rgba(74,107,82,0.03) 42px);
 }
 
 /* -------------------- Header -------------------- */
@@ -42,7 +45,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--lagerfeuer);
+  color: var(--lagerfeuer-hell);
 }
 
 .site-header h1 {
@@ -64,6 +67,32 @@ body {
   opacity: 0.8;
   max-width: 34rem;
   margin: 0 auto;
+}
+
+/* Kompakter Header auf allen Seiten ausser der Startseite */
+.site-header--compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.site-header--compact .site-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--birke);
+  text-decoration: none;
+}
+
+.site-header--compact .site-nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  gap: 1.25rem;
 }
 
 /* -------------------- Layout -------------------- */
@@ -156,7 +185,30 @@ main {
 .post-card .read-more {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--lagerfeuer);
+  color: var(--glut);
+}
+
+/* Neuester Beitrag als breite Karte */
+@media (min-width: 48rem) {
+  .post-card--featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+  }
+  .post-card--featured .thumb { aspect-ratio: auto; min-height: 20rem; }
+  .post-card--featured .thumb img { position: absolute; inset: 0; }
+  .post-card--featured .body { padding: 2rem 2rem 2rem 1.8rem; align-self: center; }
+  .post-card--featured h2 { font-size: 1.75rem; }
+  .post-card--featured .excerpt { font-size: 1rem; }
+}
+
+.page-title,
+main > h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--tanne);
+  margin: 0 0 1.5rem;
 }
 
 /* -------------------- Post detail -------------------- */
@@ -188,12 +240,43 @@ main {
   opacity: 0.5;
 }
 
-.post-detail .meta-row {
+.post-detail .post-kicker {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   font-size: 0.85rem;
   color: var(--moos);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-detail .post-kicker span + span::before {
+  content: "·";
+  margin-right: 0.4rem;
+}
+
+.post-detail .fact-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--nebel);
+  border-radius: 10px;
+}
+
+.post-detail .fact-box dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moos);
+}
+
+.post-detail .fact-box dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+  color: var(--tanne);
 }
 
 .post-detail h1 {
@@ -203,6 +286,13 @@ main {
   color: var(--tanne);
   margin: 0 0 1.5rem;
 }
+
+.post-detail .content {
+  font-size: 1.06rem;
+  max-width: 40rem;
+}
+
+.post-detail .content a { color: var(--glut); }
 
 .post-detail .content p {
   line-height: 1.7;
@@ -218,7 +308,9 @@ main {
 
 .post-detail .photo-strip .photo {
   aspect-ratio: 1;
-  border-radius: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
   background: repeating-linear-gradient(45deg, var(--nebel), var(--nebel) 10px, #e8e2d1 10px, #e8e2d1 20px);
   overflow: hidden;
 }
@@ -232,6 +324,11 @@ main {
 
 .post-detail .photo-strip .photo {
   cursor: zoom-in;
+}
+
+.post-detail .photo-strip .photo:focus-visible {
+  outline: 3px solid var(--glut);
+  outline-offset: 2px;
 }
 
 /* -------------------- Lightbox -------------------- */
@@ -290,32 +387,87 @@ main {
 }
 /* -------------------- Zusatzangaben (Campingplatz/Kosten) -------------------- */
 
-.post-detail .meta-row-secondary {
-  color: var(--lagerfeuer);
-  font-weight: 600;
-}
+/* -------------------- Ausstattung (Tags) -------------------- */
 
-/* -------------------- Tags -------------------- */
-
-.post-detail .tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.post-detail .amenities {
   margin-top: 2rem;
   padding-top: 1.2rem;
   border-top: 1px solid var(--nebel);
 }
 
-.post-detail .tag-chip {
+.post-detail .amenities h2 {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moos);
+  margin: 0 0 0.6rem;
+}
+
+.post-detail .amenities ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-detail .amenities li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--tanne);
+}
+
+/* kleines Häkchen, rein per CSS */
+.post-detail .amenities li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.35em;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid var(--moos);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* -------------------- Vorheriger / nächster Beitrag -------------------- */
+
+.post-pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.post-pager a {
+  display: block;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--nebel);
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--tanne);
+}
+
+.post-pager a:hover { border-color: var(--moos); }
+
+.post-pager span {
+  display: block;
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--tanne);
-  background: var(--birke);
-  border: 1px solid var(--moos);
-  border-radius: 999px;
-  padding: 0.3rem 0.9rem;
+  color: var(--glut);
+  margin-bottom: 0.2rem;
 }
+
+.post-pager .newer { text-align: right; }
+.post-pager .older span::before { content: "← "; }
+.post-pager .newer span::after { content: " →"; }
 
 /* -------------------- Header-Navigation -------------------- */
 
@@ -333,12 +485,52 @@ main {
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.02em;
-  color: var(--lagerfeuer);
+  color: var(--birke);
   text-decoration: none;
-  opacity: 0.85;
-  transition: opacity 0.15s ease, color 0.15s ease;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.site-nav a:hover {
-  opacity: 1;
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--lagerfeuer-hell);
+  border-bottom-color: var(--lagerfeuer-hell);
+}
+
+/* -------------------- Karte -------------------- */
+
+.map {
+  height: 70vh;
+  min-height: 22rem;
+  border-radius: 10px;
+  border: 1px solid var(--nebel);
+}
+
+.map-pin span {
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: var(--tanne);
+  border: 3px solid var(--lagerfeuer);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-content { font-family: var(--font-body); }
+
+.leaflet-container a.map-popup-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--tanne);
+  text-decoration: none;
+  margin-bottom: 0.2rem;
+}
+
+.map-popup-meta {
+  font-size: 0.8rem;
+  color: var(--moos);
 }

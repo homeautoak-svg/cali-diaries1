@@ -1,0 +1,5 @@
+<nav class="site-nav" aria-label="Hauptnavigation">
+  <a href="/"{% if page.url == "/" or page.url.startsWith("/posts/") %} aria-current="page"{% endif %}>Beiträge</a>
+  <a href="/karte/"{% if page.url == "/karte/" %} aria-current="page"{% endif %}>Karte</a>
+  <a href="/kontakt/"{% if page.url == "/kontakt/" %} aria-current="page"{% endif %}>Kontakt</a>
+</nav>
