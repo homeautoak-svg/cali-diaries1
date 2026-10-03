@@ -1,7 +1,7 @@
 ---
 title: "Saisonausklang und Winterpause: Das Jahr mit dem California neigt sich
   dem Ende zu"
-ort: Zu Hause
+ort: Daheim
 datum: 03-Oct-2026
 datum_sort: 2026-10-03
 excerpt: Eine Saison voller Abenteuer geht zu Ende. Acht Trips, unzählige
