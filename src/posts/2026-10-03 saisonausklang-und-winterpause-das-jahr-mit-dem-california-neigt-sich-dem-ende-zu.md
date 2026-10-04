@@ -5,7 +5,7 @@ ort: Daheim
 datum: 03-Oct-2026
 datum_sort: 2026-10-03
 excerpt: Eine Saison voller Abenteuer geht zu Ende. Acht Trips, unzählige
-  Stellplätze, und am Ende eine Delle in der Seitenplanke. Ein Rückblick auf die
+  Stellplätze, und am Ende ein touchierter Cali. Ein Rückblick auf die
   Highlights und ein Ausblick auf die Winterpause.
 hero_bild: /images/img_4323-small.jpeg
 ---
@@ -17,15 +17,9 @@ Von den ruhigen Nächten am Sempachersee über die Hitze und den Schotter beim G
 
 Was diese Saison für uns besonders wertvoll gemacht hat, war nicht nur das Reisen selbst, sondern auch die Entschleunigung. Der Cali hat uns gezwungen, anders zu denken: langsamer fahren, weniger in weniger Zeit unterbringen, und die Zeit tatsächlich nutzen, statt sie nur durchzufahren.
 
-
-
 ## Die Realität: Eine Delle und ein paar Kratzer
 
-Auf der Rückfahrt unseres letzten Trips hat uns die Realität aber eingeholt. In einer engen Bergstraße mit Gegenverkehr wurden wir in die Seitenplanke gedrängt. Das Ergebnis war ein paar ordentliche Dellen und Kratzer, die den Cali bleibend gezeichnet haben. Einerseits frustrierend, andererseits auch ein Mahnmal dafür, dass solche Reisenauch ihre Grenzen und Risiken haben.
-
-Wir werden den Schaden beheben lassen und den Cali wieder zu altem Glanz zurückbringen.
-
-
+Auf der Rückfahrt unseres letzten Trips hat uns die Realität aber eingeholt. In einer engen Bergstraße mit Gegenverkehr wurden wir in die Seitenplanke gedrängt. Das Ergebnis war ein paar ordentliche Dellen und Kratzer, die den Cali bleibend gezeichnet haben. Einerseits frustrierend, andererseits auch ein Mahnmal dafür, dass solche Reisen auch ihre Grenzen und Risiken haben. Wir werden den Schaden beheben lassen und den Cali wieder zu altem Glanz zurückbringen.
 
 ## Winterpause: Planung für was kommt
 
@@ -33,6 +27,6 @@ Die kommenden Monate werden wir nutzen, um die nächste Saison vorzubereiten. Da
 
 Zudem haben wir aus dieser Saison einiges gelernt. Welche Plätze haben uns gefallen? Wo möchten wir länger bleiben? Welche Regionen wollen wir noch erkunden? Die Winterpause ist die perfekte Zeit, um diese Fragen zu beantworten und einen besseren Plan für 2027 zu machen. Denn eines haben wir verstanden: Die schönsten Momente entstehen oft dort, wo man noch ein bisschen Platz zum Improvisieren lässt.
 
-Die California wird bis dahin in der Garage stehen, repariert und wartungstechnisch fit gemacht. Dann geht es im Frühling wieder los.
+Der California wird bis dahin in der Garage stehen, repariert und wartungstechnisch fit gemacht. Dann geht es im Frühling wieder los.
 
 Danke an alle, die uns dieses Jahr verfolgt haben. Wir freuen uns, euch im Frühling wieder mitzunehmen.
