@@ -1,0 +1,50 @@
+# Übersetzt neue oder geänderte deutsche Beiträge automatisch ins Englische.
+# Von Hand bearbeitete englische Fassungen werden nie überschrieben (siehe scripts/translate-posts.js).
+# Voraussetzung: Repository-Secret ANTHROPIC_API_KEY (Settings > Secrets and variables > Actions).
+name: Beiträge übersetzen
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/posts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translate-posts
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fehlende Übersetzungen erstellen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+        run: node scripts/translate-posts.js
+
+      - name: Übersetzungen committen
+        run: |
+          git add src/en/posts
+          if git diff --cached --quiet; then
+            echo "Keine neuen Übersetzungen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Englische Übersetzung (automatisch)"
+          git pull --rebase origin main
+          git push origin HEAD:main

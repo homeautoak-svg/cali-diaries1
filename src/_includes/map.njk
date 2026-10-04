@@ -1,0 +1,37 @@
+<h1 class="page-title">{{ mapHeading }}</h1>
+
+<div id="karte" class="map"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const orte = {{ (collections.orte_en if lang == "en" else collections.orte) | dump | safe }};
+
+  const map = L.map('karte', { scrollWheelZoom: false }).setView([46.8, 8.3], 8);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; {{ i18n[lang].mapAttribution }}'
+  }).addTo(map);
+
+  // Eigene Marker in den Blogfarben statt der Standard-Pins von Leaflet
+  const pin = L.divIcon({
+    className: 'map-pin',
+    html: '<span></span>',
+    iconSize: [26, 26],
+    iconAnchor: [13, 26],
+    popupAnchor: [0, -24]
+  });
+
+  const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const markers = orte.map(o =>
+    L.marker([o.lat, o.lon], { icon: pin, title: o.titel })
+      .addTo(map)
+      .bindPopup(`<a class="map-popup-title" href="${o.url}">${escapeHtml(o.titel)}</a><span class="map-popup-meta">${escapeHtml(o.ort)} · ${escapeHtml(o.datum)}</span>`)
+  );
+
+  // Ausschnitt so wählen, dass alle Orte sichtbar sind
+  if (markers.length) {
+    map.fitBounds(L.featureGroup(markers).getBounds(), { padding: [40, 40], maxZoom: 10 });
+  }
+</script>

@@ -1,0 +1,18 @@
+{%- set t = i18n[lang] %}
+{%- set langPosts = collections.posts_en if lang == "en" else collections.posts %}
+<div class="post-grid">
+{% set sortedPosts = langPosts | sort(attribute='data.datum_sort', reverse=true) %}
+{% for post in sortedPosts %}
+  <a class="post-card{% if loop.first %} post-card--featured{% endif %}" href="{{ post.url }}">
+    <div class="thumb" data-placeholder-label="{{ t.photoFollows }}">
+      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title | escape }}"{% if loop.first %} sizes="(min-width: 48rem) 32rem, 100vw" data-eager{% else %} sizes="(min-width: 56rem) 17rem, (min-width: 34rem) 50vw, 100vw"{% endif %}>{% endif %}
+    </div>
+    <div class="body">
+      <div class="meta">{{ post.data.datum | datumLang(lang) }} · {{ post.data.ort | ortLang(lang) }}</div>
+      <h2>{{ post.data.title }}</h2>
+      <p class="excerpt">{{ post.data.excerpt }}</p>
+      <span class="read-more">{{ t.readMore }} <span aria-hidden="true">→</span></span>
+    </div>
+  </a>
+{% endfor %}
+</div>

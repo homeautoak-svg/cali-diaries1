@@ -534,3 +534,36 @@ main > h1 {
   font-size: 0.8rem;
   color: var(--moos);
 }
+
+/* -------------------- Sprachumschalter -------------------- */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(244, 236, 221, 0.35);
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  align-self: center;
+}
+
+.lang-switch > * {
+  padding: 0.2rem 0.65rem;
+}
+
+.site-nav .lang-switch a {
+  font-size: inherit;
+  border-bottom: 0;
+  padding-bottom: 0.2rem;
+}
+
+.site-nav .lang-switch a:hover {
+  background: rgba(244, 236, 221, 0.12);
+}
+
+.lang-current {
+  background: var(--birke);
+  color: var(--tanne);
+}
