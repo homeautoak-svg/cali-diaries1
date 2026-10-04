@@ -86,6 +86,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "public/images": "images" });
   eleventyConfig.addPassthroughCopy({ "public/admin": "admin" });
   eleventyConfig.addPassthroughCopy("src/favicon.svg");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
 
   eleventyConfig.addTransform("responsive-images", async function (content) {
     if (!(this.page.outputPath || "").endsWith(".html")) return content;
@@ -97,6 +98,13 @@ module.exports = function (eleventyConfig) {
     );
     return content;
   });
+
+  // Datumsformate für Sitemap, RSS und strukturierte Daten
+  const toDate = (v) => (v instanceof Date ? v : new Date(v));
+  eleventyConfig.addFilter("isoDate", (v) => (v ? toDate(v).toISOString().slice(0, 10) : ""));
+  eleventyConfig.addFilter("rfc822", (v) => (v ? toDate(v).toUTCString() : ""));
+  eleventyConfig.addFilter("setAttr", (obj, key, value) => ({ ...obj, [key]: value }));
+  eleventyConfig.addFilter("absoluteUrl", (url, base) => encodeURI(base + url));
 
   // Betrag im Schweizer Format, z.B. 1234.5 -> 1'234.50
   eleventyConfig.addFilter("chf", (value) =>

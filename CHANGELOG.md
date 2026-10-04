@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.3.0 – 04-Oct-2026
+
+### Auffindbarkeit
+- `sitemap.xml` mit allen Seiten beider Sprachen inklusive hreflang-Verweisen.
+- `robots.txt` mit Verweis auf die Sitemap, `/admin/` ausgeschlossen.
+- RSS-Feeds `/feed.xml` (Deutsch) und `/en/feed.xml` (Englisch), im Seitenkopf verlinkt.
+- Strukturierte Daten (schema.org `BlogPosting` mit Campingplatz als Ort) in jedem Beitrag.
+
+## 1.2.0 – 04-Oct-2026
+
+### Zweisprachigkeit
+- Englischer Bereich unter `/en/` mit Startseite, Karte (`/en/map/`), Kontakt und Datenschutz.
+- Sprachumschalter mit Flaggen oben rechts im Header; springt zum Gegenstück der aktuellen Seite.
+- Feste Texte in `src/_data/i18n.json`, hreflang-Tags und `og:locale` pro Sprache.
+- Englische Beiträge in `src/en/posts/` unter gleichem Dateinamen; Fotos, Datum, Ort und Kosten kommen automatisch aus dem deutschen Original.
+- Alle bestehenden Beiträge übersetzt.
+- GitHub Action `translate.yml` übersetzt neue oder geänderte deutsche Beiträge per Claude API (Secret `ANTHROPIC_API_KEY`). Von Hand bearbeitete englische Fassungen werden über Prüfsummen erkannt und nie überschrieben.
+- Decap CMS: neue Collection „Beiträge (Englisch)“ zum Nachbearbeiten.
+- Monatskürzel im Anzeigedatum werden pro Sprache vereinheitlicht (Okt/Oct).
+
 ## 1.1.0 – 03-Oct-2026
 
 ### Performance
