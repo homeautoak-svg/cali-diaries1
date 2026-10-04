@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="de">
+{%- set t = i18n[lang] %}
+{%- set otherLang = "de" if lang == "en" else "en" %}
+{%- set langPosts = collections.posts_en if lang == "en" else collections.posts %}
+{%- set isHome = page.url == t.home %}
+{%- set pageTitle = t.siteName if isHome else (title ~ " – " ~ t.siteName) %}
+{%- set pageDescription = excerpt or (t.tagline if isHome) or t.description %}
+{%- set altUrl = page.url | translationUrl(otherLang, collections.all) %}
+<html lang="{{ t.htmlLang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{%- set isHome = page.url == "/" %}
-{%- set pageTitle = site.name if isHome else (title ~ " – " ~ site.name) %}
-{%- set pageDescription = excerpt or tagline or site.description %}
 <title>{{ pageTitle }}</title>
 <meta name="description" content="{{ pageDescription | escape }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<meta property="og:site_name" content="{{ site.name }}">
-<meta property="og:locale" content="de_CH">
+{%- if altUrl %}
+{%- set deUrl = altUrl if lang == "en" else page.url %}
+{%- set enUrl = page.url if lang == "en" else altUrl %}
+<link rel="alternate" hreflang="de" href="{{ site.url }}{{ deUrl }}">
+<link rel="alternate" hreflang="en" href="{{ site.url }}{{ enUrl }}">
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ deUrl }}">
+{%- endif %}
+<meta property="og:site_name" content="{{ t.siteName }}">
+<meta property="og:locale" content="{{ t.ogLocale }}">
 <meta property="og:type" content="{{ 'article' if hero_bild else 'website' }}">
-<meta property="og:title" content="{{ (title if not isHome else site.name) | escape }}">
+<meta property="og:title" content="{{ (title if not isHome else t.siteName) | escape }}">
 <meta property="og:description" content="{{ pageDescription | escape }}">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-{%- set ogBild = hero_bild or (collections.posts[0].data.hero_bild if isHome) %}
+{%- set ogBild = hero_bild or (langPosts[0].data.hero_bild if isHome) %}
 {%- if ogBild %}
 <meta property="og:image" content="{{ site.url }}{{ ogBild }}">
 <meta name="twitter:card" content="summary_large_image">
@@ -31,13 +42,13 @@
 {% if isHome %}
 <header class="site-header">
   <div class="eyebrow">VW T7 California · Andy &amp; Sarah</div>
-  <h1><a href="/">{{ site.name }}</a></h1>
-  {% if tagline %}<p class="tagline">{{ tagline }}</p>{% endif %}
+  <h1><a href="{{ t.home }}">{{ t.siteName }}</a></h1>
+  <p class="tagline">{{ t.tagline }}</p>
   {% include "nav.njk" %}
 </header>
 {% else %}
 <header class="site-header site-header--compact">
-  <a class="site-title" href="/">{{ site.name }}</a>
+  <a class="site-title" href="{{ t.home }}">{{ t.siteName }}</a>
   {% include "nav.njk" %}
 </header>
 {% endif %}
@@ -47,7 +58,7 @@
 </main>
 
 <footer class="site-footer">
-  <a href="/kontakt/">Kontakt</a> · <a href="/datenschutz/">Datenschutzerklärung</a>
+  <a href="{{ t.contactUrl }}">{{ t.navContact }}</a> · <a href="{{ t.privacyUrl }}">{{ t.privacy }}</a>
 </footer>
 
 </body>

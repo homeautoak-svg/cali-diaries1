@@ -1,5 +1,13 @@
-<nav class="site-nav" aria-label="Hauptnavigation">
-  <a href="/"{% if page.url == "/" or page.url.startsWith("/posts/") %} aria-current="page"{% endif %}>Beiträge</a>
-  <a href="/karte/"{% if page.url == "/karte/" %} aria-current="page"{% endif %}>Karte</a>
-  <a href="/kontakt/"{% if page.url == "/kontakt/" %} aria-current="page"{% endif %}>Kontakt</a>
+<nav class="site-nav" aria-label="{{ t.navLabel }}">
+  <a href="{{ t.home }}"{% if page.url == t.home or "/posts/" in page.url %} aria-current="page"{% endif %}>{{ t.navPosts }}</a>
+  <a href="{{ t.mapUrl }}"{% if page.url == t.mapUrl %} aria-current="page"{% endif %}>{{ t.navMap }}</a>
+  <a href="{{ t.contactUrl }}"{% if page.url == t.contactUrl %} aria-current="page"{% endif %}>{{ t.navContact }}</a>
+  <span class="lang-switch" role="group" aria-label="{{ t.langSwitchLabel }}">
+    {%- set switchUrl = altUrl or i18n[otherLang].home %}
+    {%- if lang == "de" %}
+    <span class="lang-current" lang="de">DE</span><a href="{{ switchUrl }}" hreflang="en" lang="en" title="Read in English">EN</a>
+    {%- else %}
+    <a href="{{ switchUrl }}" hreflang="de" lang="de" title="Auf Deutsch lesen">DE</a><span class="lang-current" lang="en">EN</span>
+    {%- endif %}
+  </span>
 </nav>

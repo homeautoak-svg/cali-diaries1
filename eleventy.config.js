@@ -103,13 +103,61 @@ module.exports = function (eleventyConfig) {
     new Intl.NumberFormat("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Number(value))
   );
 
-  eleventyConfig.addCollection("posts", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => {
-      return b.data.datum_sort - a.data.datum_sort;
-    });
+  // -------------------- Zweisprachigkeit (DE/EN) --------------------
+  // Deutsche Beiträge liegen in src/posts/, ihre Übersetzungen unter gleichem Dateinamen in
+  // src/en/posts/. Eine englische Datei ohne deutsches Original wird ignoriert.
+  const byDatumDesc = (a, b) => b.data.datum_sort - a.data.datum_sort;
+  const hasGermanOriginal = (item) =>
+    fs.existsSync(path.join(__dirname, "src/posts", path.basename(item.inputPath)));
+
+  eleventyConfig.addCollection("posts", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/posts/*.md").sort(byDatumDesc)
+  );
+
+  eleventyConfig.addCollection("posts_en", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/en/posts/*.md").filter(hasGermanOriginal).sort(byDatumDesc)
+  );
+
+  // Gegenstück einer Seite in der anderen Sprache. Feste Seiten sind hier zugeordnet,
+  // Beiträge über den Pfad (/posts/x/ <-> /en/posts/x/). Fehlt die Übersetzung, gibt
+  // der Filter null zurück; der Sprachumschalter verlinkt dann auf die Startseite.
+  const STATIC_PAGES = {
+    "/": "/en/",
+    "/karte/": "/en/map/",
+    "/kontakt/": "/en/contact/",
+    "/datenschutz/": "/en/privacy/",
+  };
+  const STATIC_PAGES_REVERSE = Object.fromEntries(Object.entries(STATIC_PAGES).map(([de, en]) => [en, de]));
+
+  eleventyConfig.addFilter("translationUrl", (url, targetLang, allPages) => {
+    if (!url) return null;
+    let candidate;
+    if (targetLang === "en") {
+      candidate = STATIC_PAGES[url] || (url.startsWith("/posts/") ? "/en" + url : null);
+    } else {
+      candidate = STATIC_PAGES_REVERSE[url] || (url.startsWith("/en/posts/") ? url.slice(3) : null);
+    }
+    if (!candidate) return null;
+    return (allPages || []).some((p) => p.url === candidate) ? candidate : null;
   });
 
-  eleventyConfig.addCollection("orte", async function (collectionApi) {
+  // Monatskürzel im Anzeigedatum an die Sprache anpassen (z.B. 12-Okt-2026 <-> 12-Oct-2026)
+  const MONTHS_DE_EN = { Mär: "Mar", Mai: "May", Okt: "Oct", Dez: "Dec" };
+  const MONTHS_EN_DE = { Mar: "Mär", May: "Mai", Oct: "Okt", Dec: "Dez" };
+  const datumLang = (datum, lang) => {
+    if (!datum) return datum;
+    const map = lang === "en" ? MONTHS_DE_EN : MONTHS_EN_DE;
+    return String(datum).replace(/-([A-Za-zä]{3})-/, (all, m) => `-${map[m] || m}-`);
+  };
+  eleventyConfig.addFilter("datumLang", datumLang);
+
+  // Platzhalter-Ort "Daheim" übersetzen, echte Ortsnamen bleiben unverändert
+  eleventyConfig.addFilter("ortLang", (ort, lang) =>
+    lang === "en" && /^daheim$/i.test(String(ort || "").trim()) ? "At home" : ort
+  );
+
+  // Kartendaten: Geokodierung über Nominatim mit persistentem Cache, je Sprache eine Collection
+  async function buildOrte(collectionApi, glob, lang) {
     const cachePath = path.join(__dirname, "src/_data/geocache.json");
     let cache = {};
     try {
@@ -118,7 +166,8 @@ module.exports = function (eleventyConfig) {
       cache = {};
     }
 
-    const posts = collectionApi.getFilteredByGlob("src/posts/*.md");
+    let posts = collectionApi.getFilteredByGlob(glob);
+    if (lang === "en") posts = posts.filter(hasGermanOriginal);
     const orte = [];
     let cacheChanged = false;
 
@@ -153,7 +202,7 @@ module.exports = function (eleventyConfig) {
           titel: post.data.title,
           url: post.url,
           ort: ortName,
-          datum: post.data.datum,
+          datum: datumLang(post.data.datum, lang),
           lat: coords.lat,
           lon: coords.lon,
         });
@@ -165,7 +214,10 @@ module.exports = function (eleventyConfig) {
     }
 
     return orte;
-  });
+  }
+
+  eleventyConfig.addCollection("orte", (collectionApi) => buildOrte(collectionApi, "src/posts/*.md", "de"));
+  eleventyConfig.addCollection("orte_en", (collectionApi) => buildOrte(collectionApi, "src/en/posts/*.md", "en"));
 
   return {
     dir: {
