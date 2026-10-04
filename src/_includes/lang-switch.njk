@@ -1,0 +1,13 @@
+{#- Sprachumschalter oben rechts im Header. Flaggen als Inline-SVG (Emoji-Flaggen fehlen unter Windows). -#}
+{%- set switchUrl = altUrl or i18n[otherLang].home %}
+{%- set flagCH %}<svg class="flag" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#d52b1e"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>{% endset %}
+{%- set flagGB %}<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#gb-t)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg>{% endset %}
+<div class="lang-switch" role="group" aria-label="{{ t.langSwitchLabel }}">
+  {%- if lang == "de" %}
+  <span class="lang-option is-current" lang="de" aria-current="true">{{ flagCH | safe }}DE</span>
+  <a class="lang-option" href="{{ switchUrl }}" hreflang="en" lang="en" title="Read in English">{{ flagGB | safe }}EN</a>
+  {%- else %}
+  <a class="lang-option" href="{{ switchUrl }}" hreflang="de" lang="de" title="Auf Deutsch lesen">{{ flagCH | safe }}DE</a>
+  <span class="lang-option is-current" lang="en" aria-current="true">{{ flagGB | safe }}EN</span>
+  {%- endif %}
+</div>
