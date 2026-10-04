@@ -63,3 +63,23 @@ layout: base.njk
   </nav>
   {% endif %}
 </article>
+
+{#- Strukturierte Daten für Suchmaschinen (schema.org BlogPosting) -#}
+{%- set ld = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": excerpt,
+  "inLanguage": t.htmlLang,
+  "datePublished": datum_sort | isoDate,
+  "url": page.url | absoluteUrl(site.url),
+  "mainEntityOfPage": page.url | absoluteUrl(site.url),
+  "author": [{ "@type": "Person", "name": "Andy" }, { "@type": "Person", "name": "Sarah" }],
+  "publisher": { "@type": "Organization", "name": t.siteName, "url": t.home | absoluteUrl(site.url) }
+} %}
+{%- if hero_bild %}{% set ld = ld | setAttr("image", hero_bild | absoluteUrl(site.url)) %}{% endif %}
+{%- if campingplatz or (ort and not (ort | lower == "daheim")) %}
+{%- set ld = ld | setAttr("contentLocation", { "@type": "Campground" if campingplatz else "Place", "name": campingplatz or ort, "address": ort }) %}
+{%- endif %}
+{%- if tags %}{% set ld = ld | setAttr("keywords", tags | join(", ")) %}{% endif %}
+<script type="application/ld+json">{{ ld | dump | safe }}</script>
