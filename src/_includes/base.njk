@@ -41,6 +41,7 @@
 
 {% if isHome %}
 <header class="site-header">
+  {% include "lang-switch.njk" %}
   <div class="eyebrow">VW T7 California · Andy &amp; Sarah</div>
   <h1><a href="{{ t.home }}">{{ t.siteName }}</a></h1>
   <p class="tagline">{{ t.tagline }}</p>
@@ -48,6 +49,7 @@
 </header>
 {% else %}
 <header class="site-header site-header--compact">
+  {% include "lang-switch.njk" %}
   <a class="site-title" href="{{ t.home }}">{{ t.siteName }}</a>
   {% include "nav.njk" %}
 </header>

@@ -535,35 +535,75 @@ main > h1 {
   color: var(--moos);
 }
 
-/* -------------------- Sprachumschalter -------------------- */
+/* -------------------- Sprachumschalter (oben rechts) -------------------- */
+
+.site-header {
+  position: relative;
+}
+
+.site-header--compact {
+  padding-right: 9.5rem; /* Platz für den Sprachumschalter */
+}
 
 .lang-switch {
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid rgba(244, 236, 221, 0.3);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.site-header--compact .lang-switch {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lang-option {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(244, 236, 221, 0.35);
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.35rem;
   border-radius: 999px;
-  overflow: hidden;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  align-self: center;
+  color: var(--birke);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
 }
 
-.lang-switch > * {
-  padding: 0.2rem 0.65rem;
+a.lang-option:hover,
+a.lang-option:focus-visible {
+  background: rgba(244, 236, 221, 0.14);
 }
 
-.site-nav .lang-switch a {
-  font-size: inherit;
-  border-bottom: 0;
-  padding-bottom: 0.2rem;
-}
-
-.site-nav .lang-switch a:hover {
-  background: rgba(244, 236, 221, 0.12);
-}
-
-.lang-current {
+.lang-option.is-current {
   background: var(--birke);
   color: var(--tanne);
+}
+
+.lang-option .flag {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  flex: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 34rem) {
+  .site-header--compact {
+    padding-right: 1.5rem;
+    padding-top: 3.4rem;
+  }
+  .site-header--compact .lang-switch {
+    top: 0.85rem;
+    transform: none;
+  }
+  .site-header:not(.site-header--compact) {
+    padding-top: 3.6rem;
+  }
 }
