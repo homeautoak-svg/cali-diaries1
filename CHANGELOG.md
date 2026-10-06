@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0 – 06-Oct-2026
+
+### Design
+- Kleine Seitenansicht unseres VW T7 California unten links im Footer aller Seiten (DE und EN), freigestellt als PNG mit transparentem Hintergrund.
+- Alt-Text pro Sprache in `src/_data/i18n.json` (`vanAlt`).
+
 ## 1.4.0 – 06-Oct-2026
 
 ### Beiträge
