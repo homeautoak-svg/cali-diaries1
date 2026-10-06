@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0 – 06-Oct-2026
+
+### Beiträge
+- Bilder im Beitragstext (Markdown `![]()`) werden auf Textbreite skaliert, mit abgerundeten Ecken.
+- Neuer Beitrag „App Camping Diary 2.0“ (DE/EN) mit Screenshots der App (Beispieldaten).
+
 ## 1.3.0 – 04-Oct-2026
 
 ### Auffindbarkeit

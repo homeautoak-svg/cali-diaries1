@@ -299,6 +299,14 @@ main > h1 {
   margin: 0 0 1.2rem;
 }
 
+.post-detail .content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 0.5rem 0 1.5rem;
+}
+
 .post-detail .photo-strip {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
