@@ -385,6 +385,19 @@ main > h1 {
   font-size: 0.78rem;
 }
 
+/* Kleine Illustration des California unten links im Footer */
+.site-footer {
+  position: relative;
+}
+
+.footer-van {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  width: clamp(4rem, 12vw, 6rem);
+  height: auto;
+}
+
 .site-footer a {
   color: var(--moos);
   text-decoration: none;
