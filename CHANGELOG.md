@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.1 – 09-Oct-2026
+
+### Design
+- „Beitrag lesen“ sitzt auf der Startseite jetzt immer am unteren Rand der Beitragskarte, unabhängig von der Länge des Kurztexts. Gilt auch für die breite Karte des neuesten Beitrags.
+
 ## 1.5.0 – 06-Oct-2026
 
 ### Design

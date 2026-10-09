@@ -120,7 +120,8 @@ main {
 }
 
 .post-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   background: #fff;
@@ -136,6 +137,9 @@ main {
 }
 
 .post-card .thumb {
+  flex: none;
+  min-height: 0;
+  overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--nebel);
   position: relative;
@@ -160,7 +164,12 @@ main {
   opacity: 0.5;
 }
 
-.post-card .body { padding: 1.1rem 1.2rem 1.3rem; }
+.post-card .body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
 
 .post-card .meta {
   font-size: 0.78rem;
@@ -183,6 +192,8 @@ main {
 }
 
 .post-card .read-more {
+  margin-top: auto;
+  align-self: flex-start;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--glut);
@@ -197,7 +208,7 @@ main {
   }
   .post-card--featured .thumb { aspect-ratio: auto; min-height: 20rem; }
   .post-card--featured .thumb img { position: absolute; inset: 0; }
-  .post-card--featured .body { padding: 2rem 2rem 2rem 1.8rem; align-self: center; }
+  .post-card--featured .body { padding: 2rem 2rem 2rem 1.8rem; }
   .post-card--featured h2 { font-size: 1.75rem; }
   .post-card--featured .excerpt { font-size: 1rem; }
 }
