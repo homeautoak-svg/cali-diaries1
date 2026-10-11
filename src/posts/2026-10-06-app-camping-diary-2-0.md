@@ -3,8 +3,8 @@ title: "App Camping Diary 2.0: Unser Logbuch im neuen Gewand"
 ort: Daheim
 datum: 06-Oct-2026
 datum_sort: 2026-10-06
-excerpt: Neue Navigation, ein Unterwegs-Modus mit Wetterwarnung, Filter für alle
-  Trips und Blogbeiträge, die gleich auf Englisch erscheinen. Was sich in
+excerpt: Neue Navigation, ein Unterwegs-Modus mit Wetterwarnung, ein Saisonplaner
+  mit Schulferien und Blogbeiträge, die gleich auf Englisch erscheinen. Was sich in
   unserer App seit dem Sommer getan hat.
 hero_bild: /images/cali-diaries-2-0-titel.jpg
 fotos:
@@ -16,8 +16,17 @@ fotos:
   - foto: /images/cali-diaries-2-0-screen-fahrzeug.jpg
   - foto: /images/cali-diaries-2-0-screen-finanzen.jpg
   - foto: /images/cali-diaries-2-0-screen-rueckblick.jpg
+  - foto: /images/cali-diaries-2-0-screen-saison.jpg
+  - foto: /images/cali-diaries-2-0-screen-einplanen.jpg
+  - foto: /images/cali-diaries-2-0-screen-status.jpg
+  - foto: /images/cali-diaries-2-0-screen-ferien.jpg
+  - foto: /images/cali-diaries-2-0-screen-fahrzeugmasse.jpg
+  - foto: /images/cali-diaries-2-0-screen-einfuehrung.jpg
+  - foto: /images/cali-diaries-2-0-laptop.jpg
 ---
 Im August haben wir hier unsere eigene Camping-App vorgestellt, das private Logbuch, mit dem wir unsere Trips planen und festhalten. Seither waren wir viel unterwegs, und mit jedem Trip ist eine neue Idee dazugekommen: Was hat gefehlt, was war umständlich, was hätten wir gerne auf einen Blick gesehen. Nach einigen kleineren Updates haben wir die App nun grundlegend umgebaut. Zeit also für Version 2.0.
+
+Nachtrag vom 11.10.2026: Inzwischen gibt es ein weiteres Update mit Saisonplaner, Schulferien und einer Ansicht für den Laptop. Mehr dazu weiter unten.
 
 Die Screenshots in diesem Beitrag zeigen Beispieldaten. Unsere echten Trips, Kosten und Kilometer bleiben privat.
 
@@ -62,6 +71,28 @@ Im Rückblick sind die Lessons Learnt, die Karte mit allen bisherigen Stellplät
 ## Vom Bericht direkt in den Blog
 
 Ein Teil der App ist eng mit diesem Blog verbunden. Aus einem Erfahrungsbericht und unseren Notizen erstellt die App auf Knopfdruck einen Entwurf für einen Blogbeitrag. Den lesen wir durch, passen ihn an und laden ihn direkt hoch. Seit Kurzem gibt es den Blog auch auf Englisch, und die App übersetzt jeden Beitrag beim Hochladen gleich mit. Englische Texte, die wir von Hand verbessert haben, überschreibt sie dabei nie.
+
+## Nachtrag: Saisonplaner, Ferien und Laptop-Ansicht
+
+Kaum war der Beitrag online, ging es weiter. Das neue Update dreht sich vor allem um die Planung der nächsten Saison, denn genau damit sind wir in der Winterpause beschäftigt.
+
+Unter Trips gibt es jetzt neben Liste und Kalender die Ansicht "Saison". Sie zeigt für jeden Monat eine Zeitleiste mit allen Trips und einem Band für die Schulferien. Tippen wir einen Platz aus der Wunschliste an, markiert die App alle freien Lücken, die lang genug sind. Dafür hat jeder Wunsch neu eine Mindestanzahl Nächte. Grün heisst ruhig, gelb heisst, dass viel los ist. Mit einem Tipp auf eine Lücke wählen wir den Anreisetag und passen die Nächte an. Hinweise zeigen Überschneidungen, Feiertage, Schulferien, das Buchungsfenster und die Fahrdistanz.
+
+![Saisonplaner mit Wunschliste und Einplanen](/images/cali-diaries-2-0-saisonplaner.jpg)
+
+Trips haben jetzt einen Status: Idee, angefragt oder bestätigt. Was noch nicht bestätigt ist, erscheint gestrichelt und wird nie zum laufenden Trip. Das Buchungsfenster aus der Wunschliste wandert mit, die Erinnerung auf der Übersicht gilt also auch für geplante Trips. Und Trips können sich nicht mehr überschneiden, belegte Tage lassen sich gar nicht erst auswählen.
+
+Die Schul- und Feiertage kommen von der OpenHolidays API, standardmässig für die Schweiz, Deutschland und Österreich. Im Kalender zeigt ein Tipp auf einen Tag, wie viel an diesem Tag los ist.
+
+![Trips mit Status und Kalender mit Ferienhinweis](/images/cali-diaries-2-0-status-ferien.jpg)
+
+Am Laptop nutzt die App jetzt die ganze Breite. Die Navigation wandert in eine Seitenleiste, und Liste und Detail stehen nebeneinander. Gerade für die Saisonplanung am Abend ist das deutlich angenehmer als auf dem Handy.
+
+![Die App am Laptop mit Liste und Trip nebeneinander](/images/cali-diaries-2-0-laptop.jpg)
+
+Im Bereich Fahrzeug stehen unter dem Kilometerstand neu die Masse und Gewichte des Cali: Länge, Breite, Höhe, Leergewicht und Zuladung. Praktisch vor einer Tiefgarage oder wenn ein Campingplatz nach der Fahrzeuglänge fragt. Und für alle, die die App selbst installieren, gibt es beim ersten Start eine kurze Einrichtung und eine Einführung, auf Deutsch oder Englisch.
+
+![Fahrzeugmasse und Einführung beim ersten Start](/images/cali-diaries-2-0-fahrzeug-einfuehrung.jpg)
 
 ## Mit Claude gebaut und zum Selberhosten
 
