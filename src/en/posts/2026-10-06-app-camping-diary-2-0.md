@@ -1,11 +1,13 @@
 ---
 title: "Camping Diary App 2.0: Our Logbook Gets a Makeover"
-excerpt: "New navigation, an on-the-road mode with weather warnings, filters for every trip and blog posts that appear in English straight away. What has changed in our app since the summer."
-source_hash: "48ff6412b97f1f91"
-translation_hash: "f62b7d3ce579ff59"
+excerpt: "New navigation, an on-the-road mode with weather warnings, a season planner with school holidays and blog posts that appear in English straight away. What has changed in our app since the summer."
+source_hash: "7f27b703f48cd2cf"
+translation_hash: "88b97baddc9058b8"
 ---
 
 In August we introduced our own camping app here, the private logbook we use to plan and record our trips. We have been out and about a lot since then, and every trip brought a new idea: what was missing, what was fiddly, what we would have liked to see at a glance. After a few smaller updates we have now rebuilt the app from the ground up. Time for version 2.0.
+
+Update of 11 October 2026: there is now another update with a season planner, school holidays and a laptop view. More on that further down.
 
 The screenshots in this post show sample data. Our real trips, costs and mileage stay private.
 
@@ -50,6 +52,28 @@ The review section brings together the lessons learnt, the map of every pitch we
 ## From report straight to the blog
 
 Part of the app is closely linked to this blog. At the push of a button, the app turns a trip report and our notes into a draft blog post. We read it through, adjust it and upload it directly. The blog has recently become available in English too, and the app translates every post as it uploads it. It never overwrites English texts we have improved by hand.
+
+## Update: season planner, holidays and laptop view
+
+The post had barely gone live when the next round of work began. The new update is mostly about planning the next season, which is exactly what keeps us busy during the winter break.
+
+Under Trips there is now a "Season" view next to list and calendar. It shows a timeline for every month with all trips and a band for the school holidays. When we tap a place from the wish list, the app highlights every free gap that is long enough. For this, each wish now has a minimum number of nights. Green means quiet, yellow means busy. Tapping a gap lets us pick the arrival day and adjust the nights. Hints point out overlaps, public holidays, school holidays, the booking window and the driving distance.
+
+![Season planner with wish list and planning sheet](/images/cali-diaries-2-0-saisonplaner.jpg)
+
+Trips now have a status: idea, requested or confirmed. Anything not yet confirmed is shown dashed and never becomes the current trip. The booking window from the wish list carries over, so the reminder on the overview covers planned trips too. And trips can no longer overlap; occupied days cannot be picked in the first place.
+
+School and public holidays come from the OpenHolidays API, for Switzerland, Germany and Austria by default. In the calendar, tapping a day shows how busy it is.
+
+![Trips with status and calendar with holiday hint](/images/cali-diaries-2-0-status-ferien.jpg)
+
+On the laptop the app now uses the full width. Navigation moves to a sidebar, and list and detail sit side by side. For planning the season in the evening, that is much more comfortable than on the phone.
+
+![The app on a laptop with list and trip side by side](/images/cali-diaries-2-0-laptop.jpg)
+
+The vehicle section now shows the Cali's dimensions and weights below the mileage: length, width, height, kerb weight and payload. Handy before an underground car park or when a campsite asks for the vehicle length. And for anyone installing the app themselves, the first start brings a short setup and an introduction, in German or English.
+
+![Vehicle dimensions and introduction on first start](/images/cali-diaries-2-0-fahrzeug-einfuehrung.jpg)
 
 ## Built with Claude, ready to self-host
 

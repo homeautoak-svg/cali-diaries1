@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.2 – 11-Oct-2026
+
+### Beiträge
+- „App Camping Diary 2.0“ (DE/EN) um einen Nachtrag zum Update vom 11.10.2026 ergänzt: Saisonplaner, Trip-Status, Schul- und Feiertage, Laptop-Ansicht, Fahrzeugmasse und Einführung, mit neuen Screenshots (Beispieldaten).
+
 ## 1.5.1 – 09-Oct-2026
 
 ### Design
