@@ -182,6 +182,22 @@ layout: base.njk
     lb.querySelector(".lb-close").addEventListener("click", close);
     // Klick neben das Foto (nicht auf Foto, Pfeile oder Vorschaubilder) schliesst die Ansicht
     lb.addEventListener("click", function (e) { if (!e.target.closest("img, button")) close(); });
+    // Klick aufs Foto: linkes Drittel zurück, rechtes Drittel weiter (seit 1.7.4)
+    function zone(img, x) {
+      var r = img.getBoundingClientRect();
+      var rel = (x - r.left) / r.width;
+      return rel < 1 / 3 ? -1 : rel > 2 / 3 ? 1 : 0;
+    }
+    frames.forEach(function (img) {
+      img.addEventListener("click", function (e) {
+        var z = zone(img, e.clientX);
+        if (z) show(current + z);
+      });
+      img.addEventListener("mousemove", function (e) {
+        var z = zone(img, e.clientX);
+        img.style.cursor = z < 0 ? "w-resize" : z > 0 ? "e-resize" : "default";
+      });
+    });
     document.addEventListener("keydown", function (e) {
       if (lb.hidden) return;
       if (e.key === "Escape") close();

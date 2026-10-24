@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.4 – 24-Oct-2026
+
+### Beiträge
+- Galerie: Ein Klick auf das linke Drittel des Fotos zeigt das vorherige, auf das rechte Drittel das nächste Foto. Am Laptop zeigt der Mauszeiger die Richtung an.
+
 ## 1.7.3 – 24-Oct-2026
 
 ### Beiträge
