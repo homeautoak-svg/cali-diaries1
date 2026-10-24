@@ -46,6 +46,30 @@
   <div class="eyebrow">VW T7 California · Andy &amp; Sarah</div>
   <h1><a href="{{ t.home }}">{{ t.siteName }}</a></h1>
   <p class="tagline">{{ t.tagline }}</p>
+  {%- set st = (collections.trips_en if lang == "en" else collections.trips) | tripStats %}
+  {% if st.trips %}
+  <div class="stats">
+    <div><b data-count="{{ st.trips }}">{{ st.trips }}</b><span>{{ t.statTrips }}</span></div>
+    <div><b data-count="{{ st.nights }}">{{ st.nights }}</b><span>{{ t.statNights }}</span></div>
+    <div><b data-count="{{ st.countries }}">{{ st.countries }}</b><span>{{ t.statCountries }}</span></div>
+    <div><b data-count="{{ st.campsites }}">{{ st.campsites }}</b><span>{{ t.statCampsites }}</span></div>
+  </div>
+  <script>
+    // Kennzahlen zählen beim Laden einmal hoch (nicht bei "Bewegung reduzieren")
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".stats [data-count]").forEach(function (el) {
+        var end = +el.dataset.count, t0 = null;
+        el.textContent = "0";
+        requestAnimationFrame(function step(ts) {
+          if (!t0) t0 = ts;
+          var k = Math.min(1, (ts - t0) / 900);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          if (k < 1) requestAnimationFrame(step);
+        });
+      });
+    }
+  </script>
+  {% endif %}
   {% include "nav.njk" %}
 </header>
 {% else %}

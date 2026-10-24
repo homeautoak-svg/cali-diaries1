@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.6.0 – 24-Oct-2026
+
+### Beiträge
+- Steckbrief ersetzt die bisherige Faktenbox: Campingplatz mit Ort, Bewertung (Sterne), Preis pro Nacht, Dauer, Kosten total, Monat des Besuchs, Stellplatz, Strom, Hunde und Saison. Leere Felder werden ausgeblendet.
+- Beträge zusätzlich in EUR zum EZB-Referenzkurs vom Reisedatum (Frankfurter-API, zwischengespeichert in `src/_data/fxcache.json`).
+- Neue Galerie: Raster mit grossem Erstbild, Ansicht zum Blättern mit Pfeilen, Pfeiltasten und Wischen, Zähler und Vorschaubildern. Ersetzt den Fotostreifen.
+- Karte „Lage und Anfahrt“ mit Kartenausschnitt, Fahrdistanz und Fahrzeit ab Zürich (OSRM, zwischengespeichert in `src/_data/routecache.json`) und Land.
+- Ausstattung verlinkt auf die neuen Merkmal-Seiten.
+- Kasten „Hinter dem Blog“ mit Links zu „Willkommen“, RSS und den besuchten Campingplätzen.
+- Lesefortschritt als dünne Linie am oberen Rand.
+- Strukturierte Daten um die Koordinaten des Campingplatzes ergänzt.
+
+### Startseite
+- Kennzahlen im Header (Trips, Nächte, Länder, Campingplätze), automatisch berechnet und beim Laden einmal hochgezählt.
+- Rubriken „Reiseberichte“ und „Rund um den Blog“; der neueste Reisebericht steht als grosse Karte oben.
+- Beitragskarten blenden beim Laden leicht versetzt ein (abgeschaltet bei „Bewegung reduzieren“).
+
+### Neue Seiten
+- „Besuchte Campingplätze“ (`/campingplaetze/`, `/en/campsites/`) mit Filter nach Land und Merkmal, in der Navigation verlinkt.
+- Merkmal-Seiten (`/merkmal/…/`, `/en/feature/…/`), z.B. „Kinderfreundliche Campingplätze“.
+
+### Daten und CMS
+- Merkmale werden über `src/_data/merkmale.json` vereinheitlicht („ruhig“ und „Ruhig“, „WIFI“ und „WiFi“), ohne die Beitragsdateien zu ändern, damit keine neue Übersetzung ausgelöst wird.
+- Neue Felder `land`, `rubrik`, `preis_nacht`, `bewertung`, `stellplatz`, `strom`, `hunde`, `saison_von`, `saison_bis`; im CMS als Auswahlfelder, auf Englisch automatisch übernommen.
+- Bestehende Beiträge ergänzt: Land, Preis pro Nacht aus dem Beitragstext, Campingplatz bei Sempach und Lindau, Ort bei Allensbach, Rubrik bei den drei Beiträgen rund um Blog und App.
+
 ## 1.5.2 – 11-Oct-2026
 
 ### Beiträge

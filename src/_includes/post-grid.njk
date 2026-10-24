@@ -1,11 +1,11 @@
 {%- set t = i18n[lang] %}
 {%- set langPosts = collections.posts_en if lang == "en" else collections.posts %}
-<div class="post-grid">
-{% set sortedPosts = langPosts | sort(attribute='data.datum_sort', reverse=true) %}
-{% for post in sortedPosts %}
-  <a class="post-card{% if loop.first %} post-card--featured{% endif %}" href="{{ post.url }}">
+{%- set sortedPosts = langPosts | sort(attribute='data.datum_sort', reverse=true) %}
+{%- set featured = (collections.trips_en if lang == "en" else collections.trips)[0] %}
+{%- macro card(post, isFeatured, i) %}
+  <a class="post-card{% if isFeatured %} post-card--featured{% endif %} fade-in" style="--i: {{ i }}" href="{{ post.url }}">
     <div class="thumb" data-placeholder-label="{{ t.photoFollows }}">
-      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title | escape }}"{% if loop.first %} sizes="(min-width: 48rem) 32rem, 100vw" data-eager{% else %} sizes="(min-width: 56rem) 17rem, (min-width: 34rem) 50vw, 100vw"{% endif %}>{% endif %}
+      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title | escape }}"{% if isFeatured %} sizes="(min-width: 48rem) 32rem, 100vw" data-eager{% else %} sizes="(min-width: 56rem) 17rem, (min-width: 34rem) 50vw, 100vw"{% endif %}>{% endif %}
     </div>
     <div class="body">
       <div class="meta">{{ post.data.datum | datumLang(lang) }} · {{ post.data.ort | ortLang(lang) }}</div>
@@ -14,5 +14,33 @@
       <span class="read-more">{{ t.readMore }} <span aria-hidden="true">→</span></span>
     </div>
   </a>
-{% endfor %}
+{%- endmacro %}
+
+<div class="section-head section-head--first">
+  <h2>{{ t.sectionTrips }}</h2>
+  <a href="{{ t.campsitesUrl }}">{{ t.allCampsites }} <span aria-hidden="true">→</span></a>
 </div>
+<div class="post-grid">
+{%- if featured %}{{ card(featured, true, 0) }}{% endif %}
+{%- for post in sortedPosts | rubrik("trips", featured) %}
+  {{ card(post, (not featured and loop.first), loop.index if loop.index < 8 else 8) }}
+{%- endfor %}
+</div>
+
+{%- set blogPosts = sortedPosts | rubrik("blog") %}
+{%- if blogPosts.length %}
+<div class="section-head">
+  <h2>{{ t.sectionBlog }}</h2>
+</div>
+<div class="mini-cards">
+  {%- for post in blogPosts %}
+  <a class="mini-card" href="{{ post.url }}">
+    {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="" sizes="64px">{% endif %}
+    <div>
+      <div class="meta">{{ post.data.datum | datumLang(lang) }}</div>
+      <h3>{{ post.data.title }}</h3>
+    </div>
+  </a>
+  {%- endfor %}
+</div>
+{%- endif %}

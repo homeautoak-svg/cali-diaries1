@@ -2,6 +2,8 @@
 title: "Drei Tage am Bodensee: Camping in Kreuzlingen"
 campingplatz: "Kreuzlingen"
 ort: "Kreuzlingen"
+preis_nacht: 59
+land: "CH"
 datum: "18-Sep-2026"
 datum_sort: 2026-09-18
 naechte: 2

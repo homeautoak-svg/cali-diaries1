@@ -1,0 +1,84 @@
+{%- set t = i18n[lang] %}
+{%- set trips = collections.trips_en if lang == "en" else collections.trips %}
+{%- set st = trips | tripStats %}
+<div class="page-intro">
+  <h1>{{ t.campsitesTitle }}</h1>
+  <p>{{ t.campsitesIntro }}</p>
+</div>
+
+<div class="filters" role="group" aria-label="Filter">
+  <span class="lbl">{{ t.filterCountry }}</span>
+  <button type="button" class="chip on" data-land="">{{ t.filterAll }}</button>
+  {%- for code in trips | laender %}
+  <button type="button" class="chip" data-land="{{ code }}">{{ t.countries[code] or code }}</button>
+  {%- endfor %}
+  <span class="sep" aria-hidden="true"></span>
+  <span class="lbl">{{ t.filterFeature }}</span>
+  {%- for m in (collections.merkmale_en if lang == "en" else collections.merkmale) %}{% if loop.index <= 6 %}
+  <button type="button" class="chip" data-merkmal="{{ m.slug }}" aria-pressed="false">{{ m.label }}</button>
+  {%- endif %}{% endfor %}
+</div>
+
+<div class="camp-table-wrap">
+<table class="camp-table">
+  <thead>
+    <tr><th>{{ t.campsite }}</th><th>{{ t.country }}</th><th>{{ t.pricePerNight }}</th><th>{{ t.nights }}</th><th>{{ t.amenities }}</th><th><span class="visually-hidden">{{ t.report }}</span></th></tr>
+  </thead>
+  <tbody>
+  {%- for post in trips %}
+    <tr data-land="{{ post.data.land }}" data-merkmale="{% for tag in post.data.tags or [] %}{{ (tag | merkmal(lang)).slug }} {% endfor %}">
+      <td>
+        <a class="pl" href="{{ post.url }}">
+          {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="" sizes="56px">{% endif %}
+          <span><b>{{ post.data.campingplatz }}</b><small>{{ post.data.ort }} · {{ post.data.datum_sort | monat(lang) }} {{ post.data.datum_sort | jahr }}</small></span>
+        </a>
+        {% if post.data.bewertung %}<span class="r">{{ post.data.bewertung | dezimal(lang) }} <small aria-hidden="true">★</small></span>{% endif %}
+      </td>
+      <td>{% if post.data.land %}<span class="flag" title="{{ t.countries[post.data.land] }}">{{ post.data.land }}</span>{% endif %}</td>
+      <td class="num">{% if post.data.preis_nacht %}CHF {{ post.data.preis_nacht | chf }}{% endif %}</td>
+      <td class="num">{{ post.data.naechte }}</td>
+      <td><div class="tags">{% for tag in post.data.tags or [] %}{% if loop.index <= 4 %}{% set m = tag | merkmal(lang) %}<a href="{{ m.url }}">{{ m.label }}</a>{% endif %}{% else %}<span class="none">{{ t.noFeatures }}</span>{% endfor %}</div></td>
+      <td><a class="go" href="{{ post.url }}">{{ t.report }} <span aria-hidden="true">→</span></a></td>
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>
+</div>
+<p class="no-match" hidden>{{ t.noMatch }}</p>
+<p class="foot-note">{{ t.campsitesCount | replace("%p", st.campsites) | replace("%c", st.countries) }}</p>
+
+<script>
+  // Filter nach Land (eins) und Merkmalen (mehrere, alle müssen passen)
+  (function () {
+    var rows = document.querySelectorAll(".camp-table tbody tr");
+    var landBtns = document.querySelectorAll(".filters [data-land]");
+    var merkBtns = document.querySelectorAll(".filters [data-merkmal]");
+    var land = "", merk = [];
+    function apply() {
+      var shown = 0;
+      rows.forEach(function (r) {
+        var tags = r.dataset.merkmale.split(" ");
+        var ok = (!land || r.dataset.land === land) && merk.every(function (m) { return tags.indexOf(m) > -1; });
+        r.hidden = !ok;
+        if (ok) shown++;
+      });
+      document.querySelector(".no-match").hidden = shown > 0;
+    }
+    landBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        land = b.dataset.land;
+        landBtns.forEach(function (x) { x.classList.toggle("on", x === b); });
+        apply();
+      });
+    });
+    merkBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var on = !b.classList.contains("on");
+        b.classList.toggle("on", on);
+        b.setAttribute("aria-pressed", on);
+        merk = on ? merk.concat(b.dataset.merkmal) : merk.filter(function (m) { return m !== b.dataset.merkmal; });
+        apply();
+      });
+    });
+  })();
+</script>

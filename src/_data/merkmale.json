@@ -1,0 +1,12 @@
+[
+  {"key": "kinderfreundlich", "de": "Kinderfreundlich", "en": "Child-friendly", "slugDe": "kinderfreundlich", "slugEn": "child-friendly", "introDe": "Plätze, die wir mit unserer Tochter als kinderfreundlich erlebt haben: Spielplatz in Sichtweite, ruhige Wege und genug Platz zum Herumrennen.", "introEn": "campsites we found child-friendly while travelling with our daughter: a playground within sight, quiet paths and plenty of room to run around.", "titleDe": "Kinderfreundliche Campingplätze", "titleEn": "Child-friendly campsites"},
+  {"key": "see", "de": "See", "en": "Lake", "slugDe": "see", "slugEn": "lake"},
+  {"key": "fluss", "de": "Fluss", "en": "River", "slugDe": "fluss", "slugEn": "river"},
+  {"key": "spielplatz", "de": "Spielplatz", "en": "Playground", "slugDe": "spielplatz", "slugEn": "playground"},
+  {"key": "restaurant", "de": "Restaurant", "en": "Restaurant", "slugDe": "restaurant", "slugEn": "restaurant"},
+  {"key": "supermarkt", "de": "Supermarkt", "en": "Supermarket", "slugDe": "supermarkt", "slugEn": "supermarket"},
+  {"key": "baecker", "de": "Bäcker", "en": "Bakery", "slugDe": "baecker", "slugEn": "bakery"},
+  {"key": "wifi", "de": "WiFi", "en": "WiFi", "slugDe": "wifi", "slugEn": "wifi", "aliases": ["wlan", "wi-fi"]},
+  {"key": "ruhig", "de": "Ruhig", "en": "Quiet", "slugDe": "ruhig", "slugEn": "quiet"},
+  {"key": "natur", "de": "Natur", "en": "Nature", "slugDe": "natur", "slugEn": "nature"}
+]

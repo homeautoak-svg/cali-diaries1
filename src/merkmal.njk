@@ -1,0 +1,13 @@
+---
+layout: base.njk
+pagination:
+  data: collections.merkmale
+  size: 1
+  alias: m
+  addAllPagesToCollections: true
+permalink: "/merkmal/{{ m.slug }}/"
+eleventyComputed:
+  title: "{{ m.title or ('Campingplätze: ' + m.label) }}"
+  excerpt: "{{ m.label }}: Campingplätze, die wir mit unserem VW T7 California besucht haben, mit Reisebericht."
+---
+{% include "merkmal-page.njk" %}

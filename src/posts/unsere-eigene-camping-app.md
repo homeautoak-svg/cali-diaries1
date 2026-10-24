@@ -13,6 +13,7 @@ fotos:
   - /images/img_4082.png
   - /images/img_4081.png
   - /images/img_4080.png
+rubrik: "blog"
 ---
 Neben diesem Blog gibt es noch ein zweites Projekt, das im Hintergrund läuft und eigentlich erst den Anstoss für alles andere gegeben hat: unser privates Camping-Logbuch. Eine App, die wir für uns selbst gebaut haben, um unsere Trips mit dem California festzuhalten und zu planen.
 

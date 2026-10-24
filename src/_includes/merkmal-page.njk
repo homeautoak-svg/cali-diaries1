@@ -1,0 +1,28 @@
+{%- set t = i18n[lang] %}
+{%- set alle = collections.merkmale_en if lang == "en" else collections.merkmale %}
+<div class="crumbs"><a href="{{ t.campsitesUrl }}">{{ t.campsitesTitle }}</a> / {{ t.featureCrumb }}</div>
+<div class="page-intro">
+  <h1>{{ m.title or (t.featureTitle | replace("%s", m.label)) }}</h1>
+  <p>{% if m.intro %}{{ m.posts.length }} {{ m.intro }}{% else %}{{ t.featureIntro | replace("%n", m.posts.length) | replace("%s", m.label) }}{% endif %}</p>
+</div>
+<div class="post-grid">
+  {%- for post in m.posts %}
+  <a class="post-card fade-in" style="--i: {{ loop.index0 if loop.index0 < 8 else 8 }}" href="{{ post.url }}">
+    <div class="thumb" data-placeholder-label="{{ t.photoFollows }}">
+      {% if post.data.hero_bild %}<img src="{{ post.data.hero_bild }}" alt="{{ post.data.title | escape }}" sizes="(min-width: 56rem) 17rem, (min-width: 34rem) 50vw, 100vw">{% endif %}
+    </div>
+    <div class="body">
+      <div class="meta">{{ post.data.datum | datumLang(lang) }} · {{ post.data.ort | ortLang(lang) }}</div>
+      <h2>{{ post.data.title }}</h2>
+      <p class="excerpt">{{ post.data.excerpt }}</p>
+      <span class="read-more">{{ t.readMore }} <span aria-hidden="true">→</span></span>
+    </div>
+  </a>
+  {%- endfor %}
+</div>
+{%- if alle.length > 1 %}
+<div class="other-tags">
+  <span class="lbl">{{ t.otherFeatures }}</span>
+  {%- for o in alle %}{% if o.slug != m.slug %}<a class="chip" href="{{ o.url }}">{{ o.label }}</a>{% endif %}{% endfor %}
+</div>
+{%- endif %}

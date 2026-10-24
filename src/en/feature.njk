@@ -1,0 +1,13 @@
+---
+layout: base.njk
+pagination:
+  data: collections.merkmale_en
+  size: 1
+  alias: m
+  addAllPagesToCollections: true
+permalink: "/en/feature/{{ m.slug }}/"
+eleventyComputed:
+  title: "{{ m.title or ('Campsites: ' + m.label) }}"
+  excerpt: "{{ m.label }}: campsites we visited with our VW T7 California, with trip reports."
+---
+{% include "merkmal-page.njk" %}

@@ -3,6 +3,8 @@ layout: base.njk
 ---
 {%- set t = i18n[lang] %}
 {%- set langPosts = collections.posts_en if lang == "en" else collections.posts %}
+{%- set r = reise[page.inputPath | postKey] or {} %}
+<div class="read-progress" aria-hidden="true"><i></i></div>
 <a class="back-link" href="{{ t.home }}">← {{ t.allPosts }}</a>
 <article class="post-detail">
   <div class="post-hero" data-placeholder-label="{{ t.photoFollows }}">
@@ -14,34 +16,94 @@ layout: base.njk
   </div>
   <h1>{{ title }}</h1>
 
+  {#- Steckbrief: zeigt nur Felder, die im Beitrag gesetzt sind -#}
   {% if campingplatz or naechte or kosten_gesamt %}
-  <dl class="fact-box">
-    {% if campingplatz %}<div><dt>{{ t.campsite }}</dt><dd>{{ campingplatz }}</dd></div>{% endif %}
-    {% if naechte %}<div><dt>{{ t.duration }}</dt><dd>{{ naechte }} {{ t.night if naechte == 1 else t.nights }}</dd></div>{% endif %}
-    {% if kosten_gesamt %}<div><dt>{{ t.costTotal }}</dt><dd>CHF {{ kosten_gesamt | chf }}</dd></div>{% endif %}
-  </dl>
+  {%- set showEur = r.fx and (preis_nacht or kosten_gesamt) %}
+  <section class="steckbrief" aria-label="{{ t.factsheet }}">
+    {% if campingplatz %}
+    <div class="sb-head">
+      <div><div class="sb-kicker">{{ t.factsheet }}</div><div class="sb-name">{{ campingplatz }}{% if ort %}, {{ ort }}{% endif %}</div></div>
+      {% if bewertung %}
+      <div class="rating" aria-label="{{ t.rating }}: {{ bewertung | dezimal(lang) }} / 5">
+        <span class="stars" aria-hidden="true">{% for i in range(1, 6) %}<svg viewBox="0 0 24 24"><path class="{{ 'on' if bewertung >= i - 0.25 else ('half' if bewertung >= i - 0.75 else 'off') }}" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>{% endfor %}</span>
+        <b>{{ bewertung | dezimal(lang) }}</b>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+    <dl class="sb-grid">
+      {% if preis_nacht %}<div><dt>{{ t.pricePerNight }}</dt><dd>CHF {{ preis_nacht | chf }}{% if r.fx %}<small class="eur">EUR {{ preis_nacht | eur(r.fx.rate) }}</small>{% endif %}</dd></div>{% endif %}
+      {% if naechte %}<div><dt>{{ t.duration }}</dt><dd>{{ naechte }} {{ t.night if naechte == 1 else t.nights }}</dd></div>{% endif %}
+      {% if kosten_gesamt %}<div><dt>{{ t.costTotal }}</dt><dd>CHF {{ kosten_gesamt | chf }}{% if r.fx %}<small class="eur">EUR {{ kosten_gesamt | eur(r.fx.rate) }}</small>{% endif %}</dd></div>{% endif %}
+      {% if datum_sort %}<div><dt>{{ t.visited }}</dt><dd>{{ datum_sort | monat(lang) }} {{ datum_sort | jahr }}</dd></div>{% endif %}
+      {% if stellplatz %}<div><dt>{{ t.pitch }}</dt><dd>{{ t.pitchValues[stellplatz] or stellplatz }}</dd></div>{% endif %}
+      {% if strom %}<div><dt>{{ t.power }}</dt><dd>{{ t.yesNo[strom] or strom }}</dd></div>{% endif %}
+      {% if hunde %}<div><dt>{{ t.dogs }}</dt><dd>{{ t.dogValues[hunde] or hunde }}</dd></div>{% endif %}
+      {% if saison_von and saison_bis %}<div><dt>{{ t.season }}</dt><dd>{{ saison_von | monat(lang) }} {{ t.until }} {{ saison_bis | monat(lang) }}</dd></div>{% endif %}
+    </dl>
+    {% if showEur %}<div class="sb-note">{{ t.fxNote | replace("%d", r.fx.date | datumPunkt) | replace("%r", r.fx.rate) }}</div>{% endif %}
+  </section>
   {% endif %}
 
   <div class="content">
     {{ content | safe }}
   </div>
 
-  {% if fotos %}
-  <div class="photo-strip">
-    {% for foto in fotos %}{% if foto.foto != hero_bild %}
-    <button type="button" class="photo" aria-label="{{ t.photoEnlarge | replace('%s', loop.index) }}" onclick="document.getElementById('lightbox-{{ loop.index }}').classList.add('open')">
-      <img src="{{ foto.foto }}" alt="" sizes="(min-width: 56rem) 13rem, 45vw">
+  {#- Galerie: Raster mit bis zu fünf Fotos, alle Fotos in der Ansicht zum Blättern -#}
+  {%- set galerie = fotos | galerieFotos(hero_bild) %}
+  {% if galerie.length %}
+  {%- set n = galerie.length %}
+  <div class="gallery gallery--{{ 5 if n > 5 else n }}">
+    {% for src in galerie %}{% if loop.index <= 5 %}
+    <button type="button" data-open="{{ loop.index0 }}" aria-label="{{ t.photoEnlarge | replace('%s', loop.index) }}">
+      <img src="{{ src }}" alt="" sizes="{{ '(min-width: 56rem) 27rem, 100vw' if loop.first else '(min-width: 56rem) 13rem, 50vw' }}">
+      {% if loop.index == 5 and n > 5 %}<span class="more">{{ t.allPhotos | replace('%s', n) }}</span>{% endif %}
     </button>
-    <div class="lightbox" id="lightbox-{{ loop.index }}" onclick="this.classList.remove('open')">
-      <img src="{{ foto.foto }}" alt="" sizes="90vw">
-      <span class="lightbox-close" aria-hidden="true">&times;</span>
-    </div>
     {% endif %}{% endfor %}
   </div>
+  <div class="gallery-lb" role="dialog" aria-modal="true" aria-label="{{ title | escape }}" hidden>
+    <button type="button" class="lb-close" aria-label="{{ t.close }}">&times;</button>
+    <div class="lb-stage">
+      <button type="button" class="lb-arrow lb-prev" aria-label="{{ t.prev }}">‹</button>
+      <div class="lb-frames">
+        {% for src in galerie %}<img src="{{ src }}" alt="{{ t.photoOf | replace('%i', loop.index) | replace('%n', n) }}" sizes="90vw" hidden>{% endfor %}
+      </div>
+      <button type="button" class="lb-arrow lb-next" aria-label="{{ t.next }}">›</button>
+    </div>
+    <div class="lb-bar">
+      <span class="lb-count" aria-live="polite"></span>
+      <div class="lb-thumbs">{% for src in galerie %}<button type="button" data-go="{{ loop.index0 }}" aria-label="{{ t.photoEnlarge | replace('%s', loop.index) }}"><img src="{{ src }}" alt="" sizes="56px"></button>{% endfor %}</div>
+      <span class="lb-hint">{{ t.galleryHint }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  {#- Lage und Anfahrt -#}
+  {% if r.lat and campingplatz %}
+  <section class="map-card" aria-label="{{ t.location }}">
+    <div class="map-mini" id="map-mini" data-lat="{{ r.lat }}" data-lon="{{ r.lon }}" data-name="{{ campingplatz | escape }}"></div>
+    <div class="info">
+      <h2>{{ t.location }}</h2>
+      {% if r.km %}
+      <div class="row"><span>{{ t.fromStart | replace('%s', r.start) }}</span><span>{{ t.approx }} {{ r.km | rundeKm }} km</span></div>
+      <div class="row"><span>{{ t.driveTime }}</span><span>{{ t.approx }} {{ r.min | fahrzeit }}</span></div>
+      {% endif %}
+      {% if land %}<div class="row"><span>{{ t.country }}</span><span>{{ t.countries[land] or land }}</span></div>{% endif %}
+      <a href="{{ t.mapUrl }}">{{ t.toBigMap }} →</a>
+      {% if r.km %}<small class="route-note">{{ t.routeNote }}</small>{% endif %}
+    </div>
+  </section>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") document.querySelectorAll(".lightbox.open").forEach((el) => el.classList.remove("open"));
-    });
+    (function () {
+      var el = document.getElementById("map-mini");
+      if (!window.L) return;
+      var pos = [+el.dataset.lat, +el.dataset.lon];
+      var map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile, zoomControl: false }).setView(pos, 10);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; {{ t.mapAttribution }}" }).addTo(map);
+      L.marker(pos, { icon: L.divIcon({ className: "map-pin", html: "<span></span>", iconSize: [26, 26], iconAnchor: [13, 26] }), title: el.dataset.name }).addTo(map);
+    })();
   </script>
   {% endif %}
 
@@ -49,10 +111,19 @@ layout: base.njk
   <section class="amenities" aria-label="{{ t.amenities }}">
     <h2>{{ t.amenities }}</h2>
     <ul>
-      {% for tag in tags %}<li>{{ tag }}</li>{% endfor %}
+      {% for tag in tags %}{% set m = tag | merkmal(lang) %}<li>{% if campingplatz %}<a href="{{ m.url }}">{{ m.label }}</a>{% else %}{{ m.label }}{% endif %}</li>{% endfor %}
     </ul>
   </section>
   {% endif %}
+
+  <section class="about-box">
+    <img src="/images/site-california-t7-side.png" alt="" sizes="9rem">
+    <div>
+      <h2>{{ t.aboutTitle }}</h2>
+      <p>{{ t.aboutText }}</p>
+      <div class="links"><a href="{{ t.aboutUrl }}">{{ t.aboutMore }}</a><a href="{{ t.feedUrl }}">{{ t.rssSubscribe }}</a><a href="{{ t.campsitesUrl }}">{{ t.allCampsites }}</a></div>
+    </div>
+  </section>
 
   {% set newer = langPosts | getPreviousCollectionItem %}
   {% set older = langPosts | getNextCollectionItem %}
@@ -63,6 +134,71 @@ layout: base.njk
   </nav>
   {% endif %}
 </article>
+
+<script>
+  // Lesefortschritt
+  (function () {
+    var bar = document.querySelector(".read-progress i");
+    var art = document.querySelector(".post-detail");
+    function update() {
+      var rect = art.getBoundingClientRect();
+      var total = art.offsetHeight - window.innerHeight;
+      bar.style.width = (total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 1) * 100 + "%";
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  })();
+
+  // Galerie: Öffnen, Blättern mit Pfeilen, Tasten und Wischen, Schliessen
+  (function () {
+    var lb = document.querySelector(".gallery-lb");
+    if (!lb) return;
+    var frames = lb.querySelectorAll(".lb-frames img");
+    var thumbs = lb.querySelectorAll(".lb-thumbs button");
+    var count = lb.querySelector(".lb-count");
+    var current = 0, lastFocus = null, touchX = null;
+    function show(i) {
+      current = (i + frames.length) % frames.length;
+      frames.forEach(function (f, k) { f.hidden = k !== current; if (k === current) f.loading = "eager"; });
+      thumbs.forEach(function (b, k) { b.classList.toggle("on", k === current); });
+      count.textContent = (current + 1) + " / " + frames.length;
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      lb.hidden = false;
+      document.body.style.overflow = "hidden";
+      show(i);
+      lb.querySelector(".lb-close").focus();
+    }
+    function close() {
+      lb.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll(".gallery [data-open]").forEach(function (b) {
+      b.addEventListener("click", function () { open(+b.dataset.open); });
+    });
+    thumbs.forEach(function (b) { b.addEventListener("click", function () { show(+b.dataset.go); }); });
+    lb.querySelector(".lb-prev").addEventListener("click", function () { show(current - 1); });
+    lb.querySelector(".lb-next").addEventListener("click", function () { show(current + 1); });
+    lb.querySelector(".lb-close").addEventListener("click", close);
+    lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lb-frames")) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (lb.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "ArrowRight") show(current + 1);
+    });
+    lb.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+    });
+  })();
+</script>
 
 {#- Strukturierte Daten für Suchmaschinen (schema.org BlogPosting) -#}
 {%- set ld = {
@@ -79,7 +215,9 @@ layout: base.njk
 } %}
 {%- if hero_bild %}{% set ld = ld | setAttr("image", hero_bild | absoluteUrl(site.url)) %}{% endif %}
 {%- if campingplatz or (ort and not (ort | lower == "daheim")) %}
-{%- set ld = ld | setAttr("contentLocation", { "@type": "Campground" if campingplatz else "Place", "name": campingplatz or ort, "address": ort }) %}
+{%- set place = { "@type": "Campground" if campingplatz else "Place", "name": campingplatz or ort, "address": ort } %}
+{%- if r.lat %}{% set place = place | setAttr("geo", { "@type": "GeoCoordinates", "latitude": r.lat, "longitude": r.lon }) %}{% endif %}
+{%- set ld = ld | setAttr("contentLocation", place) %}
 {%- endif %}
 {%- if tags %}{% set ld = ld | setAttr("keywords", tags | join(", ")) %}{% endif %}
 <script type="application/ld+json">{{ ld | dump | safe }}</script>

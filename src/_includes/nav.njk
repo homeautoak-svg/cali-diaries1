@@ -1,5 +1,6 @@
 <nav class="site-nav" aria-label="{{ t.navLabel }}">
   <a href="{{ t.home }}"{% if page.url == t.home or "/posts/" in page.url %} aria-current="page"{% endif %}>{{ t.navPosts }}</a>
+  <a href="{{ t.campsitesUrl }}"{% if page.url == t.campsitesUrl or "/merkmal/" in page.url or "/feature/" in page.url %} aria-current="page"{% endif %}>{{ t.navCampsites }}</a>
   <a href="{{ t.mapUrl }}"{% if page.url == t.mapUrl %} aria-current="page"{% endif %}>{{ t.navMap }}</a>
   <a href="{{ t.contactUrl }}"{% if page.url == t.contactUrl %} aria-current="page"{% endif %}>{{ t.navContact }}</a>
 </nav>

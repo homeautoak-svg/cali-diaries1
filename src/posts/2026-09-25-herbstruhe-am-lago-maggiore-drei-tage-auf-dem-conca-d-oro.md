@@ -2,6 +2,8 @@
 title: "Herbstruhe am Lago Maggiore: Drei Tage auf dem Conca D'Oro"
 campingplatz: "Conca D’Oro"
 ort: "Feriolo di Baveno"
+preis_nacht: 32.10
+land: "IT"
 datum: "25-Sep-2026"
 datum_sort: 2026-09-25
 naechte: 2

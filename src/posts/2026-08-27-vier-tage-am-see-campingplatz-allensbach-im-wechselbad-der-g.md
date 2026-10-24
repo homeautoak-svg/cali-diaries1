@@ -1,7 +1,8 @@
 ---
 title: "Vier Tage am See: Campingplatz Allensbach im Wetterwechsel"
 campingplatz: "Campingplatz Allensbach"
-ort: "Campingplatz Allensbach"
+ort: "Allensbach"
+land: "DE"
 datum: "27-Aug-2026"
 datum_sort: 2026-08-27
 naechte: 3

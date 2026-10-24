@@ -1,6 +1,9 @@
 ---
 title: "Zwei Nächte am Sempachersee mit dem T7"
 ort: "Sempach TCS"
+preis_nacht: 73.60
+land: "CH"
+campingplatz: "TCS Camping Sempach"
 datum: "07-Aug-2026"
 datum_sort: 2026-08-07
 naechte: 2

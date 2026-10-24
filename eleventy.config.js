@@ -111,6 +111,136 @@ module.exports = function (eleventyConfig) {
     new Intl.NumberFormat("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Number(value))
   );
 
+  // CHF-Betrag zum gespeicherten Kurs in EUR umrechnen (Kurs aus src/_data/reise.js)
+  eleventyConfig.addFilter("eur", (value, rate) =>
+    new Intl.NumberFormat("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Number(value) * Number(rate))
+  );
+
+  // Dezimalzahl je Sprache (4.5 -> "4,5" auf Deutsch)
+  eleventyConfig.addFilter("dezimal", (value, lang) => {
+    const s = Number(value).toFixed(1);
+    return lang === "en" ? s : s.replace(".", ",");
+  });
+
+  // Fotos für die Galerie: alle Fotos ausser dem Titelbild, nur die Pfade
+  eleventyConfig.addFilter("galerieFotos", (fotos, hero) =>
+    (fotos || []).map((f) => (typeof f === "string" ? f : f && f.foto)).filter((src) => src && src !== hero)
+  );
+
+  // ISO-Datum 2026-09-25 -> 25.09.2026
+  eleventyConfig.addFilter("datumPunkt", (iso) => String(iso || "").split("-").reverse().join("."));
+
+  // Dateiname eines Beitrags ohne Endung, Schlüssel für die Reisedaten
+  eleventyConfig.addFilter("postKey", (inputPath) => path.basename(inputPath || "", ".md"));
+
+  // Monatsname aus Datum (Date) oder Monatszahl 1-12
+  const MONTHS = {
+    de: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+    en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  };
+  eleventyConfig.addFilter("monat", (value, lang) => {
+    const i =
+      value instanceof Date ? value.getUTCMonth() : /^\d{1,2}$/.test(String(value)) ? Number(value) - 1 : new Date(value).getUTCMonth();
+    return (MONTHS[lang] || MONTHS.de)[i] || "";
+  });
+  eleventyConfig.addFilter("jahr", (value) => (value instanceof Date ? value : new Date(value)).getUTCFullYear());
+
+  // Fahrdistanz und -zeit gerundet, damit keine Scheingenauigkeit entsteht
+  eleventyConfig.addFilter("rundeKm", (km) => (km < 100 ? Math.round(km / 5) * 5 : Math.round(km / 10) * 10));
+  eleventyConfig.addFilter("fahrzeit", (min) => {
+    const m = Math.max(15, Math.round(min / 15) * 15);
+    const h = Math.floor(m / 60);
+    const rest = m % 60;
+    return h ? `${h} h${rest ? " " + rest + " min" : ""}` : `${rest} min`;
+  });
+
+  // -------------------- Merkmale (Ausstattungs-Tags) --------------------
+  // Tags werden über src/_data/merkmale.json vereinheitlicht ("ruhig", "Ruhig" und
+  // "Quiet" sind dasselbe Merkmal). Unbekannte Tags bekommen eine eigene Seite mit
+  // ihrem Namen. Die Beitragsdateien selbst bleiben unverändert.
+  const MERKMALE = require("./src/_data/merkmale.json");
+  const slugify = (s) =>
+    String(s)
+      .toLowerCase()
+      .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const MERKMAL_INDEX = new Map();
+  for (const m of MERKMALE) {
+    for (const name of [m.key, m.de, m.en, ...(m.aliases || [])]) MERKMAL_INDEX.set(String(name).toLowerCase().trim(), m);
+  }
+  const merkmal = (tag, lang) => {
+    const m = MERKMAL_INDEX.get(String(tag).toLowerCase().trim());
+    if (m) {
+      const slug = lang === "en" ? m.slugEn : m.slugDe;
+      return {
+        key: m.key,
+        slug,
+        label: lang === "en" ? m.en : m.de,
+        intro: lang === "en" ? m.introEn : m.introDe,
+        title: lang === "en" ? m.titleEn : m.titleDe,
+        url: lang === "en" ? `/en/feature/${slug}/` : `/merkmal/${slug}/`,
+      };
+    }
+    const label = String(tag).trim();
+    const slug = slugify(label);
+    return {
+      key: slug,
+      slug,
+      label: label.charAt(0).toUpperCase() + label.slice(1),
+      url: lang === "en" ? `/en/feature/${slug}/` : `/merkmal/${slug}/`,
+    };
+  };
+  eleventyConfig.addFilter("merkmal", merkmal);
+
+  // Reiseberichte: Beiträge mit Campingplatz
+  const isTrip = (item) => !!item.data.campingplatz;
+  eleventyConfig.addCollection("trips", (api) => api.getFilteredByGlob("src/posts/*.md").filter(isTrip).sort(byDatumDesc));
+  eleventyConfig.addCollection("trips_en", (api) =>
+    api.getFilteredByGlob("src/en/posts/*.md").filter(hasGermanOriginal).filter(isTrip).sort(byDatumDesc)
+  );
+
+  // Startseite: "blog" = Rubrik "Rund um den Blog", "trips" = alle übrigen ohne den Aufmacher
+  eleventyConfig.addFilter("rubrik", (posts, which, featured) =>
+    (posts || []).filter((p) =>
+      which === "blog" ? p.data.rubrik === "blog" : p.data.rubrik !== "blog" && (!featured || p.url !== featured.url)
+    )
+  );
+
+  // Länder der Reiseberichte in Reihenfolge des ersten Besuchs (neueste zuerst)
+  eleventyConfig.addFilter("laender", (trips) => [...new Set((trips || []).map((p) => p.data.land).filter(Boolean))]);
+
+  // Kennzahlen für die Startseite
+  eleventyConfig.addFilter("tripStats", (trips) => {
+    const list = trips || [];
+    return {
+      trips: list.length,
+      nights: list.reduce((sum, p) => sum + (Number(p.data.naechte) || 0), 0),
+      countries: new Set(list.map((p) => p.data.land).filter(Boolean)).size,
+      campsites: new Set(list.map((p) => String(p.data.campingplatz).trim().toLowerCase())).size,
+    };
+  });
+
+  // Merkmal-Seiten: ein Eintrag pro verwendetem Merkmal mit den passenden Reiseberichten
+  function buildMerkmale(trips, lang) {
+    const map = new Map();
+    for (const post of trips) {
+      for (const tag of post.data.tags || []) {
+        const m = merkmal(tag, lang);
+        if (!map.has(m.slug)) map.set(m.slug, { ...m, posts: [] });
+        const entry = map.get(m.slug);
+        if (!entry.posts.includes(post)) entry.posts.push(post);
+      }
+    }
+    return [...map.values()].sort((a, b) => b.posts.length - a.posts.length || a.label.localeCompare(b.label));
+  }
+  eleventyConfig.addCollection("merkmale", (api) =>
+    buildMerkmale(api.getFilteredByGlob("src/posts/*.md").filter(isTrip).sort(byDatumDesc), "de")
+  );
+  eleventyConfig.addCollection("merkmale_en", (api) =>
+    buildMerkmale(api.getFilteredByGlob("src/en/posts/*.md").filter(hasGermanOriginal).filter(isTrip).sort(byDatumDesc), "en")
+  );
+
   // -------------------- Zweisprachigkeit (DE/EN) --------------------
   // Deutsche Beiträge liegen in src/posts/, ihre Übersetzungen unter gleichem Dateinamen in
   // src/en/posts/. Eine englische Datei ohne deutsches Original wird ignoriert.
@@ -134,7 +264,9 @@ module.exports = function (eleventyConfig) {
     "/karte/": "/en/map/",
     "/kontakt/": "/en/contact/",
     "/datenschutz/": "/en/privacy/",
+    "/campingplaetze/": "/en/campsites/",
   };
+  for (const m of MERKMALE) STATIC_PAGES[`/merkmal/${m.slugDe}/`] = `/en/feature/${m.slugEn}/`;
   const STATIC_PAGES_REVERSE = Object.fromEntries(Object.entries(STATIC_PAGES).map(([de, en]) => [en, de]));
 
   eleventyConfig.addFilter("translationUrl", (url, targetLang, allPages) => {

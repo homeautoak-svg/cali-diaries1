@@ -23,6 +23,7 @@ fotos:
   - foto: /images/cali-diaries-2-0-screen-fahrzeugmasse.jpg
   - foto: /images/cali-diaries-2-0-screen-einfuehrung.jpg
   - foto: /images/cali-diaries-2-0-laptop.jpg
+rubrik: "blog"
 ---
 Im August haben wir hier unsere eigene Camping-App vorgestellt, das private Logbuch, mit dem wir unsere Trips planen und festhalten. Seither waren wir viel unterwegs, und mit jedem Trip ist eine neue Idee dazugekommen: Was hat gefehlt, was war umständlich, was hätten wir gerne auf einen Blick gesehen. Nach einigen kleineren Updates haben wir die App nun grundlegend umgebaut. Zeit also für Version 2.0.
 

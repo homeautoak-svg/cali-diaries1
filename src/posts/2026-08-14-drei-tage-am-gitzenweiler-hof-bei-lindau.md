@@ -1,6 +1,9 @@
 ---
 title: Drei Tage am Gitzenweiler Hof bei Lindau
 ort: Lindau (Bodensee)
+preis_nacht: 54.04
+land: "DE"
+campingplatz: "Gitzenweiler Hof"
 datum: 14-Aug-2026
 datum_sort: 2026-08-14
 naechte: 2

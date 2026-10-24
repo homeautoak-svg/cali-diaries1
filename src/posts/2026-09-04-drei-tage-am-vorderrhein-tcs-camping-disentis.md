@@ -2,6 +2,8 @@
 title: "Zwei kalte Nächte am Vorderrhein in Disentis"
 campingplatz: "TCS Camping Disentis"
 ort: "Disentis"
+preis_nacht: 46
+land: "CH"
 datum: "04-Sep-2026"
 datum_sort: 2026-09-04
 naechte: 2

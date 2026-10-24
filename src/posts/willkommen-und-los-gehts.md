@@ -8,6 +8,7 @@ excerpt: Wer wir sind, warum wir uns für zwei Jahre einen California geleast
   haben und was wir mit diesem Blog vorhaben.
 hero_bild: /images/img_3923.jpg
 fotos: null
+rubrik: "blog"
 ---
 
 Wir sind Andy und Sarah, wohnhaft in der Schweiz, und seit Kurzem stolze Fahrer eines VW T7 California. Zwei Jahre haben wir uns Zeit gegeben, um herauszufinden, ob uns das Campingleben liegt, und die ersten Ausfahrten haben diese Frage schon ziemlich eindeutig beantwortet.

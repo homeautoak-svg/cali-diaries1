@@ -29,6 +29,20 @@ collections:
       - { label: "Kurztext für die Startseiten-Karte", name: "excerpt", widget: "text" }
       - { label: "Titelbild", name: "hero_bild", widget: "image", required: false }
       - { label: "Fotostreifen", name: "fotos", widget: "list", field: { label: "Foto", name: "foto", widget: "image" }, required: false }
+      # Steckbrief: alle Felder optional, leere Felder werden auf der Seite ausgeblendet.
+      # Ein Beitrag mit Campingplatz erscheint in "Besuchte Campingplätze" und in der Statistik.
+      - { label: "Rubrik", name: "rubrik", widget: "select", required: false, hint: "Leer lassen für Reiseberichte", options: [{ label: "Rund um den Blog", value: "blog" }] }
+      - { label: "Campingplatz", name: "campingplatz", widget: "string", required: false }
+      - { label: "Land", name: "land", widget: "select", required: false, options: [{ label: "Schweiz", value: "CH" }, { label: "Deutschland", value: "DE" }, { label: "Italien", value: "IT" }, { label: "Österreich", value: "AT" }, { label: "Frankreich", value: "FR" }, { label: "Liechtenstein", value: "LI" }, { label: "Niederlande", value: "NL" }, { label: "Dänemark", value: "DK" }, { label: "Spanien", value: "ES" }, { label: "Slowenien", value: "SI" }, { label: "Kroatien", value: "HR" }] }
+      - { label: "Bewertung (1 bis 5)", name: "bewertung", widget: "number", value_type: "float", min: 1, max: 5, step: 0.5, required: false }
+      - { label: "Preis pro Nacht (CHF)", name: "preis_nacht", widget: "number", value_type: "float", required: false }
+      - { label: "Kosten total (CHF)", name: "kosten_gesamt", widget: "number", value_type: "float", required: false }
+      - { label: "Stellplatz", name: "stellplatz", widget: "select", required: false, options: [{ label: "Klein", value: "klein" }, { label: "Mittel", value: "mittel" }, { label: "Gross", value: "gross" }] }
+      - { label: "Strom", name: "strom", widget: "select", required: false, options: [{ label: "Ja", value: "ja" }, { label: "Nein", value: "nein" }] }
+      - { label: "Hunde", name: "hunde", widget: "select", required: false, options: [{ label: "Erlaubt", value: "ja" }, { label: "Nicht erlaubt", value: "nein" }] }
+      - { label: "Saison von", name: "saison_von", widget: "select", required: false, options: [{ label: "Januar", value: 1 }, { label: "Februar", value: 2 }, { label: "März", value: 3 }, { label: "April", value: 4 }, { label: "Mai", value: 5 }, { label: "Juni", value: 6 }, { label: "Juli", value: 7 }, { label: "August", value: 8 }, { label: "September", value: 9 }, { label: "Oktober", value: 10 }, { label: "November", value: 11 }, { label: "Dezember", value: 12 }] }
+      - { label: "Saison bis", name: "saison_bis", widget: "select", required: false, options: [{ label: "Januar", value: 1 }, { label: "Februar", value: 2 }, { label: "März", value: 3 }, { label: "April", value: 4 }, { label: "Mai", value: 5 }, { label: "Juni", value: 6 }, { label: "Juli", value: 7 }, { label: "August", value: 8 }, { label: "September", value: 9 }, { label: "Oktober", value: 10 }, { label: "November", value: 11 }, { label: "Dezember", value: 12 }] }
+      - { label: "Ausstattung (Tags)", name: "tags", widget: "list", required: false, hint: "z.B. Kinderfreundlich, See, Fluss, Spielplatz, Restaurant, Supermarkt, WiFi, Ruhig" }
       - { label: "Text", name: "body", widget: "markdown" }
 
   # Englische Fassungen. Sie entstehen automatisch (App oder GitHub Action) unter

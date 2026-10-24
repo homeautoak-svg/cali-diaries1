@@ -16,6 +16,15 @@ const SHARED_FIELDS = [
   "hero_bild",
   "fotos",
   "karte",
+  "land",
+  "rubrik",
+  "preis_nacht",
+  "bewertung",
+  "stellplatz",
+  "strom",
+  "hunde",
+  "saison_von",
+  "saison_bis",
 ];
 
 const cache = new Map();
