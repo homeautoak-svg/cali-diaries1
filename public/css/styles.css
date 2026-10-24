@@ -769,8 +769,6 @@ a.lang-option:focus-visible {
 .map-card .links { display: flex; flex-direction: column; gap: 0.3rem; }
 .map-card .links a { color: var(--glut); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
 .map-card .links a:hover { text-decoration: underline; }
-.map-card .map-attr { width: 100%; font-size: 0.75rem; color: var(--moos); }
-.map-card .map-attr a { color: inherit; }
 
 /* -------------------- Ausstattung als Links -------------------- */
 

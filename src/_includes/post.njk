@@ -95,7 +95,6 @@ layout: base.njk
       <div class="links">
         <a href="https://www.openstreetmap.org/?mlat={{ r.lat }}&amp;mlon={{ r.lon }}#map=13/{{ r.lat }}/{{ r.lon }}" target="_blank" rel="noopener">{{ t.osmLink }}</a>
       </div>
-      {% if r.karteQuelle == "osm" %}<small class="map-attr">{{ "Map data" if lang == "en" else "Kartendaten" }} © {{ t.mapAttribution }}</small>{% endif %}
     </div>
   </section>
   {% endif %}

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.3 – 24-Oct-2026
+
+### Beiträge
+- Quellenhinweis zu OpenStreetMap als kleine Zeile in der unteren rechten Ecke der Karte statt als eigene Zeile darunter (von der Lizenz der Kartendaten verlangt).
+
 ## 1.7.2 – 24-Oct-2026
 
 ### Beiträge
