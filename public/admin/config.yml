@@ -33,6 +33,7 @@ collections:
       # Ein Beitrag mit Campingplatz erscheint in "Besuchte Campingplätze" und in der Statistik.
       - { label: "Rubrik", name: "rubrik", widget: "select", required: false, hint: "Leer lassen für Reiseberichte", options: [{ label: "Rund um den Blog", value: "blog" }] }
       - { label: "Campingplatz", name: "campingplatz", widget: "string", required: false }
+      - { label: "Koordinaten des Platzes (optional)", name: "koordinaten", widget: "string", required: false, hint: "z.B. 47.6461, 9.19842 (in Google Maps Rechtsklick auf den Platz, Koordinaten kopieren). Leer lassen: Der Platz wird automatisch in OpenStreetMap gesucht." }
       - { label: "Land", name: "land", widget: "select", required: false, options: [{ label: "Schweiz", value: "CH" }, { label: "Deutschland", value: "DE" }, { label: "Italien", value: "IT" }, { label: "Österreich", value: "AT" }, { label: "Frankreich", value: "FR" }, { label: "Liechtenstein", value: "LI" }, { label: "Niederlande", value: "NL" }, { label: "Dänemark", value: "DK" }, { label: "Spanien", value: "ES" }, { label: "Slowenien", value: "SI" }, { label: "Kroatien", value: "HR" }] }
       - { label: "Bewertung (1 bis 5)", name: "bewertung", widget: "number", value_type: "float", min: 1, max: 5, step: 0.5, required: false }
       - { label: "Preis pro Nacht (CHF)", name: "preis_nacht", widget: "number", value_type: "float", required: false }

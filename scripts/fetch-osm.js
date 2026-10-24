@@ -7,7 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
-const { viewBox, osmFile } = require("../lib/lagekarte");
+const { viewBox, osmFile, resolveCoords } = require("../lib/lagekarte");
 
 const ROOT = path.join(__dirname, "..");
 const POSTS = path.join(ROOT, "src/posts");
@@ -95,10 +95,15 @@ async function main() {
         console.warn(`Geokoding fehlgeschlagen für "${data.ort}":`, e.message);
       }
     }
-    const c = geocache[data.ort];
+    let campsites = {};
+    try { campsites = JSON.parse(fs.readFileSync(path.join(ROOT, "src/_data/campsites.json"), "utf8")); } catch (e) { campsites = {}; }
+    const o = geocache[data.ort];
+    const c = resolveCoords(path.basename(file, ".md"), data, geocache, campsites);
     if (!c) { console.warn(`Keine Koordinaten für "${data.ort}" (${file})`); continue; }
     const target = path.join(OUT, osmFile(c.lat, c.lon));
+    // vorhandene Daten um den Platz oder (bei kleiner Verschiebung) um den Ort genügen
     if (fs.existsSync(target)) continue;
+    if (o && fs.existsSync(path.join(OUT, osmFile(o.lat, o.lon))) && Math.abs(o.lat - c.lat) < 0.03 && Math.abs(o.lon - c.lon) < 0.04) continue;
     const bbox = viewBox(c.lat, c.lon, 1.25);
     console.log(`Hole OSM-Daten für ${data.campingplatz} (${data.ort})`);
     // Bis zu drei Versuche mit wachsender Pause (Overpass begrenzt die Anfragen pro Minute)

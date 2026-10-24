@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.1 – 24-Oct-2026
+
+### Beiträge und Karten
+- Pins stehen auf dem Campingplatz selbst statt auf der Ortsmitte, in der Lagekarte und auf der grossen Karte. Distanz und Fahrzeit beziehen sich ebenfalls auf den Platz.
+- Reihenfolge der Quellen: Feld „Koordinaten“ im Beitrag (von Hand oder künftig aus der App), dann der in OpenStreetMap gefundene Platz, dann wie bisher der Ort.
+- Kreuzlingen: Campingplatz als „Camping Fischerhaus“ eingetragen.
+
+### Daten und CMS
+- Neues Skript `scripts/find-campsites.js` sucht Plätze (tourism=camp_site) im Umkreis von 15 km um den Ort, bevorzugt nach Namen, und legt sie in `src/_data/campsites.json` ab. Läuft in der GitHub Action vor dem Holen der Kartendaten; die Kartendaten werden künftig um den Platz geholt.
+- Overpass-Anfragen mit weiteren Servern und als eine gemeinsame Anfrage, damit die Action nicht minutenlang wartet.
+- CMS: optionales Feld „Koordinaten des Platzes“ (z.B. aus Google Maps kopiert), wird auf Englisch übernommen.
+
 ## 1.7.0 – 24-Oct-2026
 
 ### Beiträge

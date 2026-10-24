@@ -25,6 +25,9 @@ const SHARED_FIELDS = [
   "hunde",
   "saison_von",
   "saison_bis",
+  "koordinaten",
+  "lat",
+  "lon",
 ];
 
 const cache = new Map();

@@ -1,6 +1,6 @@
 ---
 title: "Drei Tage am Bodensee: Camping in Kreuzlingen"
-campingplatz: "Kreuzlingen"
+campingplatz: "Camping Fischerhaus"
 ort: "Kreuzlingen"
 preis_nacht: 59
 land: "CH"

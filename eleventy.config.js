@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { default: Image, generateHTML } = require("@11ty/eleventy-img");
+const { resolveCoords } = require("./lib/lagekarte");
 
 // Responsive Bilder: Alle <img src="/images/..."> und og:image-Tags im fertigen
 // HTML werden beim Build durch verkleinerte WebP-Versionen mit srcset ersetzt.
@@ -335,6 +336,14 @@ module.exports = function (eleventyConfig) {
         } catch (e) {
           console.warn(`Geokoding fehlgeschlagen für "${ortName}":`, e.message);
         }
+      }
+
+      // Pin auf den Campingplatz selbst, falls bekannt (seit 1.7.1, siehe lib/lagekarte.js)
+      if (coords) {
+        let campsites = {};
+        try { campsites = JSON.parse(fs.readFileSync(path.join(__dirname, "src/_data/campsites.json"), "utf8")); } catch (e) { campsites = {}; }
+        const pos = resolveCoords(path.basename(post.inputPath, ".md"), post.data, cache, campsites);
+        if (pos) coords = { lat: pos.lat, lon: pos.lon };
       }
 
       if (coords) {

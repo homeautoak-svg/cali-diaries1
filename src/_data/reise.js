@@ -8,7 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
-const { renderMap, osmFile } = require("../../lib/lagekarte");
+const { renderMap, osmFile, resolveCoords } = require("../../lib/lagekarte");
 
 const DATA = __dirname;
 const POSTS = path.join(__dirname, "..", "posts");
@@ -35,6 +35,7 @@ module.exports = async function () {
   const geo = readJson("geocache.json");
   const fx = readJson("fxcache.json");
   const routes = readJson("routecache.json");
+  const campsites = readJson("campsites.json");
   const changed = new Set();
   const result = {};
 
@@ -73,14 +74,17 @@ module.exports = async function () {
         }
       }
       const c = geo[ort];
-      if (c) {
-        entry.lat = c.lat;
-        entry.lon = c.lon;
-        const key = `${c.lat},${c.lon}`;
+      // Pin, Distanz und Karte beziehen sich auf den Campingplatz selbst, falls bekannt
+      const pos = resolveCoords(path.basename(file, ".md"), data, geo, campsites);
+      if (c && pos) {
+        entry.lat = pos.lat;
+        entry.lon = pos.lon;
+        entry.posQuelle = pos.quelle;
+        const key = `${pos.lat},${pos.lon}`;
         if (!routes[key]) {
           try {
             const json = await getJson(
-              `https://router.project-osrm.org/route/v1/driving/${START.lon},${START.lat};${c.lon},${c.lat}?overview=false`
+              `https://router.project-osrm.org/route/v1/driving/${START.lon},${START.lat};${pos.lon},${pos.lat}?overview=false`
             );
             if (json.routes && json.routes[0]) {
               routes[key] = { km: Math.round(json.routes[0].distance / 1000), min: Math.round(json.routes[0].duration / 60) };
@@ -90,16 +94,21 @@ module.exports = async function () {
             console.warn(`Route nach "${ort}" nicht verfügbar:`, e.message);
           }
         }
-        if (routes[key]) Object.assign(entry, routes[key], { start: START.name });
+        // Ohne Route zum Platz die Route zum Ort verwenden (wenige km Unterschied)
+        const route = routes[key] || routes[`${c.lat},${c.lon}`];
+        if (route) Object.assign(entry, route, { start: START.name });
 
-        // Gezeichnete Lagekarte (seit 1.7.0): OSM-Daten aus src/_data/osm/, sonst Ersatzkarte
+        // Gezeichnete Lagekarte (seit 1.7.0): OSM-Daten aus src/_data/osm/ (zuerst um den Platz,
+        // sonst um den Ort; der Ausschnitt ist grösser als die Karte), sonst Ersatzkarte
         if (data.campingplatz) {
           let osm = null;
-          try { osm = JSON.parse(fs.readFileSync(path.join(DATA, "osm", osmFile(c.lat, c.lon)), "utf8")); } catch (e) { osm = null; }
+          for (const f of [osmFile(pos.lat, pos.lon), osmFile(c.lat, c.lon)]) {
+            try { osm = JSON.parse(fs.readFileSync(path.join(DATA, "osm", f), "utf8")); break; } catch (e) { osm = null; }
+          }
           const km = entry.km ? (entry.km < 100 ? Math.round(entry.km / 5) * 5 : Math.round(entry.km / 10) * 10) : null;
           try {
             entry.karte = renderMap({
-              lat: c.lat, lon: c.lon, name: data.campingplatz, place: ort, osm, km,
+              lat: pos.lat, lon: pos.lon, name: data.campingplatz, place: ort, osm, km,
               start: { name: START.name, lat: START.lat, lon: START.lon },
               ariaLabel: `${data.campingplatz}, ${ort}`,
             });
