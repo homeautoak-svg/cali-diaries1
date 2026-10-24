@@ -310,6 +310,18 @@ main > h1 {
   margin: 0 0 1.2rem;
 }
 
+/* Listen im Beitragstext mit gleichem Zeilenabstand wie die Absätze */
+.post-detail .content ul,
+.post-detail .content ol {
+  line-height: 1.7;
+  margin: 0 0 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.post-detail .content li + li {
+  margin-top: 0.5rem;
+}
+
 .post-detail .content img {
   display: block;
   width: 100%;

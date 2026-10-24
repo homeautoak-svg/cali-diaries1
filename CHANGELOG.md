@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.3 – 24-Oct-2026
+
+### Beiträge
+- Neuer Beitrag „Kratzer, leere Batterie und eine klemmende Tür: Was wir aus einer Woche Werkstatt gelernt haben“ mit Foto der Kratzer.
+
+### Design
+- Aufzählungen im Beitragstext haben denselben Zeilenabstand wie die Absätze und etwas Luft zwischen den Punkten.
+
 ## 1.6.2 – 24-Oct-2026
 
 ### Beiträge
