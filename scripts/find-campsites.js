@@ -11,7 +11,12 @@ const ROOT = path.join(__dirname, "..");
 const POSTS = path.join(ROOT, "src/posts");
 const GEOCACHE = path.join(ROOT, "src/_data/geocache.json");
 const OUT = path.join(ROOT, "src/_data/campsites.json");
-const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+const ENDPOINTS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.private.coffee/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+];
 const UA = "cali-diaries.ch (Kontakt: info@cali-diaries.ch)";
 const RADIUS_M = 15000;
 
@@ -47,12 +52,13 @@ async function overpass(q) {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": UA },
         body: "data=" + encodeURIComponent(q),
-        signal: AbortSignal.timeout(45000),
+        signal: AbortSignal.timeout(30000),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (e) {
       lastError = e;
+      if (process.env.GITHUB_ACTIONS) console.log(`::warning::Overpass ${new URL(url).host}: ${e.message}`);
     }
   }
   throw lastError;
@@ -113,7 +119,8 @@ async function main() {
       treffer: byName[0] ? "name" : "naechster",
       alternativen: nearest.filter((x) => x.osm !== pick.osm).slice(0, 3).map((x) => `${x.name || "(ohne Namen)"} (${x.km} km)`),
     };
-    console.log(`  ${data.campingplatz} -> ${pick.name || "(ohne Namen)"}, ${pick.km} km vom Ort, Treffer: ${found[key].treffer}`);
+    const msg = `${data.campingplatz} -> ${pick.name || "(ohne Namen)"}, ${pick.km} km vom Ort, Treffer: ${found[key].treffer}`;
+    console.log(process.env.GITHUB_ACTIONS ? `::notice::${msg}` : `  ${msg}`);
   }
   fs.writeFileSync(OUT, JSON.stringify(found, null, 2) + "\n");
 }

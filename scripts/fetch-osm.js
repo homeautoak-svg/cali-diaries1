@@ -13,7 +13,12 @@ const ROOT = path.join(__dirname, "..");
 const POSTS = path.join(ROOT, "src/posts");
 const GEOCACHE = path.join(ROOT, "src/_data/geocache.json");
 const OUT = path.join(ROOT, "src/_data/osm");
-const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+const ENDPOINTS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.private.coffee/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+];
 const UA = "cali-diaries.ch (Kontakt: info@cali-diaries.ch)";
 
 const round = (v) => Math.round(v * 1e5) / 1e5;
@@ -48,6 +53,7 @@ async function overpass(q) {
       return await res.json();
     } catch (e) {
       lastError = e;
+      if (process.env.GITHUB_ACTIONS) console.log(`::warning::Overpass ${new URL(url).host}: ${e.message}`);
     }
   }
   throw lastError;

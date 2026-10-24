@@ -44,7 +44,8 @@ jobs:
 
       - name: Übersetzungen und Kartendaten committen
         run: |
-          git add src/en/posts src/_data/osm src/_data/geocache.json src/_data/campsites.json
+          git add src/en/posts src/_data/osm src/_data/geocache.json
+          if [ -f src/_data/campsites.json ]; then git add src/_data/campsites.json; fi
           if git diff --cached --quiet; then
             echo "Keine neuen Übersetzungen oder Kartendaten."
             exit 0
