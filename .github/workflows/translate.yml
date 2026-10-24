@@ -36,15 +36,18 @@ jobs:
           ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
         run: node scripts/translate-posts.js
 
-      - name: Übersetzungen committen
+      - name: Kartendaten für neue Campingplätze holen
+        run: node scripts/fetch-osm.js
+
+      - name: Übersetzungen und Kartendaten committen
         run: |
-          git add src/en/posts
+          git add src/en/posts src/_data/osm
           if git diff --cached --quiet; then
-            echo "Keine neuen Übersetzungen."
+            echo "Keine neuen Übersetzungen oder Kartendaten."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Englische Übersetzung (automatisch)"
+          git commit -m "Übersetzung und Kartendaten (automatisch)"
           git pull --rebase origin main
           git push origin HEAD:main
