@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.1 – 24-Oct-2026
+
+### Fehlerbehebungen
+- Galerie: Fotos in der Grossansicht werden nicht mehr verzerrt (Breite und Höhe aus dem Bild-Build wurden zusammen mit der Maximalgrösse angewendet).
+- Galerie: Die Karte „Lage und Anfahrt“ liegt nicht mehr über der geöffneten Grossansicht. Die Karte hat einen eigenen Stapelkontext, die Grossansicht liegt zuoberst.
+- Galerie: Zähler „1 / 6“ bricht auf dem Handy nicht mehr um.
+
 ## 1.6.0 – 24-Oct-2026
 
 ### Beiträge
