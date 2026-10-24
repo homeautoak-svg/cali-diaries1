@@ -80,12 +80,21 @@ async function main() {
     if (fs.existsSync(target)) continue;
     const bbox = viewBox(c.lat, c.lon, 1.25);
     console.log(`Hole OSM-Daten für ${data.campingplatz} (${data.ort})`);
-    const json = await overpass(query(bbox));
-    const out = { fetched: new Date().toISOString().slice(0, 10), bbox, elements: json.elements.map(compact) };
-    fs.writeFileSync(target, JSON.stringify(out));
-    console.log(`  ${out.elements.length} Elemente, ${(fs.statSync(target).size / 1024).toFixed(0)} KB`);
-    fetched++;
-    await new Promise((r) => setTimeout(r, 2000));
+    // Bis zu drei Versuche mit wachsender Pause (Overpass begrenzt die Anfragen pro Minute)
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const json = await overpass(query(bbox));
+        const out = { fetched: new Date().toISOString().slice(0, 10), bbox, elements: json.elements.map(compact) };
+        fs.writeFileSync(target, JSON.stringify(out));
+        console.log(`  ${out.elements.length} Elemente, ${(fs.statSync(target).size / 1024).toFixed(0)} KB`);
+        fetched++;
+        break;
+      } catch (e) {
+        console.warn(`  Versuch ${attempt} fehlgeschlagen: ${e.message}`);
+        if (attempt < 3) await new Promise((r) => setTimeout(r, 20000 * attempt));
+      }
+    }
+    await new Promise((r) => setTimeout(r, 8000));
   }
   console.log(`Fertig, ${fetched} Orte neu geholt.`);
 }
