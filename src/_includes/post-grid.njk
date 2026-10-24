@@ -1,7 +1,8 @@
 {%- set t = i18n[lang] %}
 {%- set langPosts = collections.posts_en if lang == "en" else collections.posts %}
 {%- set sortedPosts = langPosts | sort(attribute='data.datum_sort', reverse=true) %}
-{%- set featured = (collections.trips_en if lang == "en" else collections.trips)[0] %}
+{#- Aufmacher: immer der neueste Beitrag ausser "Rund um den Blog", unabhängig vom Campingplatz -#}
+{%- set featured = (sortedPosts | rubrik("trips"))[0] %}
 {%- macro card(post, isFeatured, i) %}
   <a class="post-card{% if isFeatured %} post-card--featured{% endif %} fade-in" style="--i: {{ i }}" href="{{ post.url }}">
     <div class="thumb" data-placeholder-label="{{ t.photoFollows }}">

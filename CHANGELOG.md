@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.4 – 24-Oct-2026
+
+### Startseite
+- Die grosse Karte oben zeigt wieder den neuesten Beitrag, auch wenn er keinen Campingplatz hat (z.B. Werkstatt- oder Saisonbeiträge). Bisher stand dort der neueste Beitrag mit Campingplatz. Ausgenommen bleibt die Rubrik „Rund um den Blog“.
+
 ## 1.6.3 – 24-Oct-2026
 
 ### Beiträge
