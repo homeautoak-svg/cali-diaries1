@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.2 – 24-Oct-2026
+
+### Beiträge
+- Lage und Anfahrt: „Auf OpenStreetMap öffnen“ ist der einzige sichtbare Link, ohne Pfeil. Der Link zur grossen Karte entfällt hier (sie bleibt über die Navigation erreichbar), der Quellenhinweis ist reiner Text.
+
 ## 1.7.1 – 24-Oct-2026
 
 ### Beiträge und Karten

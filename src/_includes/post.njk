@@ -93,10 +93,9 @@ layout: base.njk
         {% if land %}<div><dt>{{ t.country }}</dt><dd>{{ t.countries[land] or land }}</dd></div>{% endif %}
       </dl>
       <div class="links">
-        <a href="https://www.openstreetmap.org/?mlat={{ r.lat }}&amp;mlon={{ r.lon }}#map=13/{{ r.lat }}/{{ r.lon }}" target="_blank" rel="noopener">{{ t.osmLink }} ↗</a>
-        <a href="{{ t.mapUrl }}">{{ t.toBigMap }} →</a>
+        <a href="https://www.openstreetmap.org/?mlat={{ r.lat }}&amp;mlon={{ r.lon }}#map=13/{{ r.lat }}/{{ r.lon }}" target="_blank" rel="noopener">{{ t.osmLink }}</a>
       </div>
-      {% if r.karteQuelle == "osm" %}<small class="map-attr">{{ "Map data" if lang == "en" else "Kartendaten" }} © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">{{ t.mapAttribution }}</a></small>{% endif %}
+      {% if r.karteQuelle == "osm" %}<small class="map-attr">{{ "Map data" if lang == "en" else "Kartendaten" }} © {{ t.mapAttribution }}</small>{% endif %}
     </div>
   </section>
   {% endif %}
