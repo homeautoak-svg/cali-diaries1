@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.2 – 24-Oct-2026
+
+### Beiträge
+- Galerie: Ein Klick neben das Foto schliesst die Grossansicht, nicht nur das X. Klicks auf Foto, Pfeile und Vorschaubilder lassen sie offen.
+- Galerie: Das vorherige und das nächste Foto werden vorab geladen, damit Blättern ohne Wartezeit geht.
+- Steckbrief: Hinweis zum EZB-Kurs unter den Beträgen entfernt.
+- Lage und Anfahrt: Hinweis „Strecke laut OpenStreetMap, ohne Verkehr“ entfernt.
+
 ## 1.6.1 – 24-Oct-2026
 
 ### Fehlerbehebungen

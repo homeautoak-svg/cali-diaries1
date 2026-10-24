@@ -702,7 +702,6 @@ a.lang-option:focus-visible {
 .sb-grid dt { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moos); }
 .sb-grid dd { margin: 0.2rem 0 0; font-weight: 600; color: var(--rinde); }
 .sb-grid dd small.eur { display: block; font-weight: 400; font-size: 0.85rem; color: var(--moos); margin-top: 0.1rem; }
-.sb-note { font-size: 0.78rem; color: var(--moos); padding: 0.55rem 1.2rem; border-top: 1px solid var(--nebel); background: #fbf8f2; }
 
 /* -------------------- Galerie -------------------- */
 
@@ -755,7 +754,6 @@ a.lang-option:focus-visible {
 .map-card .row span:last-child { font-weight: 600; text-align: right; }
 .map-card a { color: var(--glut); font-weight: 600; text-decoration: none; margin-top: auto; }
 .map-card a:hover { text-decoration: underline; }
-.map-card .route-note { font-size: 0.75rem; color: var(--moos); }
 
 /* -------------------- Ausstattung als Links -------------------- */
 
