@@ -1,0 +1,80 @@
+{
+  "2026-08-07-zwei-naechte-am-sempachersee-mit-dem-t7": {
+    "lat": 47.1243,
+    "lon": 8.18909,
+    "osmName": "TCS Camping Sempach",
+    "osm": "way/230811699",
+    "kmVomOrt": 0.1,
+    "treffer": "name",
+    "alternativen": [
+      "Campingplatz Seeland TCS (0.2 km)",
+      "Campingplatz St. Margrethen (5.2 km)",
+      "Camping Sursee (9.5 km)"
+    ]
+  },
+  "2026-08-14-drei-tage-am-gitzenweiler-hof-bei-lindau": {
+    "lat": 47.58398,
+    "lon": 9.70548,
+    "osmName": "Gitzenweiler Hof",
+    "osm": "way/81164280",
+    "kmVomOrt": 1.4,
+    "treffer": "name",
+    "alternativen": [
+      "BRK Jugendzeltlagerplatz Lindau (3.2 km)",
+      "Campingplatz Eschbach (4.3 km)",
+      "Park-Camping Lindau (4.7 km)"
+    ]
+  },
+  "2026-08-27-vier-tage-am-see-campingplatz-allensbach-im-wechselbad-der-g": {
+    "lat": 47.71017,
+    "lon": 9.07902,
+    "osmName": "Campingplatz Allensbach",
+    "osm": "way/361439202",
+    "kmVomOrt": 0.1,
+    "treffer": "name",
+    "alternativen": [
+      "Campingplatz Hegne am Bodensee (1.4 km)",
+      "Sandseele (2.9 km)",
+      "DGB-Jugendcamp Markelfingen (4.4 km)"
+    ]
+  },
+  "2026-09-04-drei-tage-am-vorderrhein-tcs-camping-disentis": {
+    "lat": 46.69746,
+    "lon": 8.85473,
+    "osmName": "TCS Camping Disentis",
+    "osm": "relation/9040646",
+    "kmVomOrt": 0.8,
+    "treffer": "name",
+    "alternativen": [
+      "Campadi Garvera (6.2 km)",
+      "Camping Viva (8.3 km)",
+      "Campingplatz Trun (11.3 km)"
+    ]
+  },
+  "2026-09-18-drei-tage-am-bodensee-camping-in-kreuzlingen": {
+    "lat": 47.6461,
+    "lon": 9.19842,
+    "osmName": "Camping Fischerhaus",
+    "osm": "way/89313223",
+    "kmVomOrt": 1.9,
+    "treffer": "naechster",
+    "alternativen": [
+      "Campingplatz Bruderhofer (4.2 km)",
+      "Camping Möwe (6.3 km)",
+      "Ruderbaum Camping (7.2 km)"
+    ]
+  },
+  "2026-09-25-herbstruhe-am-lago-maggiore-drei-tage-auf-dem-conca-d-oro": {
+    "lat": 45.93391,
+    "lon": 8.48467,
+    "osmName": "Conca d'Oro",
+    "osm": "way/256623144",
+    "kmVomOrt": 0.7,
+    "treffer": "name",
+    "alternativen": [
+      "Camping Orchidea (0.6 km)",
+      "Campeggio Piano Grande (0.8 km)",
+      "Conca d'Oro (1 km)"
+    ]
+  }
+}
