@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.0 – 24-Oct-2026
+
+### Beiträge
+- Gezeichnete Lagekarte statt der Leaflet-Karte bei „Lage und Anfahrt“: Seen mit Wellenmuster und weichen Ufern, Flüsse, grössere Strassen, Ortschaften und Seenamen auf Papierton, dazu Pin, Richtung und Distanz nach Zürich, Nordpfeil und Massstab. Ausschnitt 26 km breit, auf dem Handy auf die Mitte um den Campingplatz zugeschnitten.
+- Ein Klick auf die Karte (oder „Auf OpenStreetMap öffnen“) öffnet OpenStreetMap beim Campingplatz. Quellenhinweis „© OpenStreetMap-Mitwirkende“ gemäss Lizenz unter der Karte.
+- Die Kartenbibliothek Leaflet wird in Beiträgen nicht mehr geladen; die Seiten laden schneller.
+
+### Daten
+- Kartendaten aus OpenStreetMap (Overpass) liegen pro Ort in `src/_data/osm/`. Die GitHub Action „Beiträge übersetzen“ holt sie für neue Campingplätze automatisch (`scripts/fetch-osm.js`), geokodiert neue Orte und committet beides. Der Cloudflare-Build braucht dafür keine Verbindung zu OpenStreetMap.
+- Fehlen die Daten noch (z.B. direkt nach dem Veröffentlichen), erscheint eine gröbere Ersatzkarte aus einem Natural-Earth-Auszug (`lib/karte-ersatz.json`), bis die Action die Daten nachgeliefert hat.
+- Renderer in `lib/lagekarte.js`; neue Abhängigkeiten `polygon-clipping` und `polylabel`.
+
 ## 1.6.4 – 24-Oct-2026
 
 ### Startseite

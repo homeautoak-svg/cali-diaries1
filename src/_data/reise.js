@@ -8,6 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
+const { renderMap, osmFile } = require("../../lib/lagekarte");
 
 const DATA = __dirname;
 const POSTS = path.join(__dirname, "..", "posts");
@@ -90,6 +91,23 @@ module.exports = async function () {
           }
         }
         if (routes[key]) Object.assign(entry, routes[key], { start: START.name });
+
+        // Gezeichnete Lagekarte (seit 1.7.0): OSM-Daten aus src/_data/osm/, sonst Ersatzkarte
+        if (data.campingplatz) {
+          let osm = null;
+          try { osm = JSON.parse(fs.readFileSync(path.join(DATA, "osm", osmFile(c.lat, c.lon)), "utf8")); } catch (e) { osm = null; }
+          const km = entry.km ? (entry.km < 100 ? Math.round(entry.km / 5) * 5 : Math.round(entry.km / 10) * 10) : null;
+          try {
+            entry.karte = renderMap({
+              lat: c.lat, lon: c.lon, name: data.campingplatz, place: ort, osm, km,
+              start: { name: START.name, lat: START.lat, lon: START.lon },
+              ariaLabel: `${data.campingplatz}, ${ort}`,
+            });
+            entry.karteQuelle = osm ? "osm" : "ersatz";
+          } catch (e) {
+            console.warn(`Lagekarte für "${ort}" fehlgeschlagen:`, e.message);
+          }
+        }
       }
     }
 

@@ -76,32 +76,29 @@ layout: base.njk
   </div>
   {% endif %}
 
-  {#- Lage und Anfahrt -#}
+  {#- Lage und Anfahrt: gezeichnete Karte (seit 1.7.0), Klick öffnet OpenStreetMap -#}
   {% if r.lat and campingplatz %}
   <section class="map-card" aria-label="{{ t.location }}">
-    <div class="map-mini" id="map-mini" data-lat="{{ r.lat }}" data-lon="{{ r.lon }}" data-name="{{ campingplatz | escape }}"></div>
+    {% if r.karte %}
+    <a class="map-art" href="https://www.openstreetmap.org/?mlat={{ r.lat }}&amp;mlon={{ r.lon }}#map=13/{{ r.lat }}/{{ r.lon }}"
+      target="_blank" rel="noopener" aria-label="{{ t.openOsm | replace('%s', campingplatz) }}">{{ r.karte | safe }}</a>
+    {% endif %}
     <div class="info">
       <h2>{{ t.location }}</h2>
-      {% if r.km %}
-      <div class="row"><span>{{ t.fromStart | replace('%s', r.start) }}</span><span>{{ t.approx }} {{ r.km | rundeKm }} km</span></div>
-      <div class="row"><span>{{ t.driveTime }}</span><span>{{ t.approx }} {{ r.min | fahrzeit }}</span></div>
-      {% endif %}
-      {% if land %}<div class="row"><span>{{ t.country }}</span><span>{{ t.countries[land] or land }}</span></div>{% endif %}
-      <a href="{{ t.mapUrl }}">{{ t.toBigMap }} →</a>
+      <dl>
+        {% if r.km %}
+        <div><dt>{{ t.fromStart | replace('%s', r.start) }}</dt><dd>{{ t.approx }} {{ r.km | rundeKm }} km</dd></div>
+        <div><dt>{{ t.driveTime }}</dt><dd>{{ t.approx }} {{ r.min | fahrzeit }}</dd></div>
+        {% endif %}
+        {% if land %}<div><dt>{{ t.country }}</dt><dd>{{ t.countries[land] or land }}</dd></div>{% endif %}
+      </dl>
+      <div class="links">
+        <a href="https://www.openstreetmap.org/?mlat={{ r.lat }}&amp;mlon={{ r.lon }}#map=13/{{ r.lat }}/{{ r.lon }}" target="_blank" rel="noopener">{{ t.osmLink }} ↗</a>
+        <a href="{{ t.mapUrl }}">{{ t.toBigMap }} →</a>
+      </div>
+      {% if r.karteQuelle == "osm" %}<small class="map-attr">{{ "Map data" if lang == "en" else "Kartendaten" }} © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">{{ t.mapAttribution }}</a></small>{% endif %}
     </div>
   </section>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    (function () {
-      var el = document.getElementById("map-mini");
-      if (!window.L) return;
-      var pos = [+el.dataset.lat, +el.dataset.lon];
-      var map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile, zoomControl: false }).setView(pos, 10);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; {{ t.mapAttribution }}" }).addTo(map);
-      L.marker(pos, { icon: L.divIcon({ className: "map-pin", html: "<span></span>", iconSize: [26, 26], iconAnchor: [13, 26] }), title: el.dataset.name }).addTo(map);
-    })();
-  </script>
   {% endif %}
 
   {% if tags %}

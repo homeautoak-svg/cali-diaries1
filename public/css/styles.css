@@ -756,16 +756,21 @@ a.lang-option:focus-visible {
 
 /* -------------------- Lage und Anfahrt -------------------- */
 
-.map-card { margin: 2.2rem 0 0; display: grid; grid-template-columns: 1.3fr 1fr; background: #fff; border: 1px solid var(--nebel); border-radius: 12px; overflow: hidden; }
-/* eigener Stapelkontext, damit die Leaflet-Ebenen (z-index bis 1000) nicht über Galerie und Kopfzeile liegen */
-.map-mini { min-height: 15rem; background: #efe7d6; position: relative; z-index: 0; isolation: isolate; }
-.map-card .info { padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 0.8rem; }
-.map-card h2 { font-family: var(--font-display); font-weight: 600; color: var(--tanne); font-size: 1.25rem; margin: 0; }
-.map-card .row { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--nebel); padding-bottom: 0.55rem; }
-.map-card .row span:first-child { color: var(--moos); }
-.map-card .row span:last-child { font-weight: 600; text-align: right; }
-.map-card a { color: var(--glut); font-weight: 600; text-decoration: none; margin-top: auto; }
-.map-card a:hover { text-decoration: underline; }
+.map-card { margin: 2.2rem 0 0; background: #fff; border: 1px solid var(--nebel); border-radius: 12px; overflow: hidden; }
+/* Gezeichnete Karte (SVG) über die volle Breite; Klick öffnet OpenStreetMap */
+.map-art { display: block; line-height: 0; border-bottom: 1px solid var(--nebel); }
+.map-art svg { display: block; width: 100%; height: auto; }
+.map-art:focus-visible { outline: 3px solid var(--lagerfeuer); outline-offset: -3px; }
+.map-card .info { padding: 1rem 1.4rem 1.1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 2rem; }
+.map-card h2 { font-family: var(--font-display); font-weight: 600; color: var(--tanne); font-size: 1.2rem; margin: 0; width: 100%; }
+.map-card dl { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin: 0; flex: 1; }
+.map-card dt { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moos); }
+.map-card dd { margin: 0.15rem 0 0; font-weight: 600; }
+.map-card .links { display: flex; flex-direction: column; gap: 0.3rem; }
+.map-card .links a { color: var(--glut); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+.map-card .links a:hover { text-decoration: underline; }
+.map-card .map-attr { width: 100%; font-size: 0.75rem; color: var(--moos); }
+.map-card .map-attr a { color: inherit; }
 
 /* -------------------- Ausstattung als Links -------------------- */
 
@@ -834,8 +839,9 @@ a.lang-option:focus-visible {
   .gallery--4 button:nth-child(4) { grid-column: span 2; }
   .gallery--2 { grid-auto-rows: 10rem; }
   .gallery--1 { grid-auto-rows: 15rem; }
-  .map-card { grid-template-columns: 1fr; }
-  .map-mini { min-height: 12rem; }
+  .map-card .links { width: 100%; }
+  /* Handy: Karte auf die Mitte um den Campingplatz zuschneiden, damit die Schrift lesbar bleibt */
+  .map-art svg { height: 320px; }
   .about-box { grid-template-columns: 1fr; }
   .about-box img { width: 8rem; }
   .lb-stage { gap: 0.5rem; }

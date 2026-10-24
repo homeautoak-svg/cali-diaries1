@@ -74,6 +74,21 @@ async function main() {
   for (const file of fs.readdirSync(POSTS).filter((f) => f.endsWith(".md"))) {
     const data = matter(fs.readFileSync(path.join(POSTS, file), "utf8")).data;
     if (!data.campingplatz || !data.ort || data.karte === false) continue;
+    // Neue Orte hier geokodieren und im Cache ablegen (wird von der Action mit committet)
+    if (!geocache[data.ort]) {
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(data.ort)}`,
+          { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(15000) });
+        const json = await res.json();
+        if (json[0]) {
+          geocache[data.ort] = { lat: Math.round(parseFloat(json[0].lat) * 1000) / 1000, lon: Math.round(parseFloat(json[0].lon) * 1000) / 1000 };
+          fs.writeFileSync(GEOCACHE, JSON.stringify(geocache, null, 2) + "\n");
+        }
+        await new Promise((r) => setTimeout(r, 1100));
+      } catch (e) {
+        console.warn(`Geokoding fehlgeschlagen für "${data.ort}":`, e.message);
+      }
+    }
     const c = geocache[data.ort];
     if (!c) { console.warn(`Keine Koordinaten für "${data.ort}" (${file})`); continue; }
     const target = path.join(OUT, osmFile(c.lat, c.lon));

@@ -106,7 +106,9 @@
       "ES": "Spanien",
       "SI": "Slowenien",
       "HR": "Kroatien"
-    }
+    },
+    "openOsm": "%s auf OpenStreetMap öffnen",
+    "osmLink": "Auf OpenStreetMap öffnen"
   },
   "en": {
     "htmlLang": "en",
@@ -215,6 +217,8 @@
       "ES": "Spain",
       "SI": "Slovenia",
       "HR": "Croatia"
-    }
+    },
+    "openOsm": "Open %s on OpenStreetMap",
+    "osmLink": "Open on OpenStreetMap"
   }
 }
