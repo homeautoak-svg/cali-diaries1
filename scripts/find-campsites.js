@@ -47,7 +47,7 @@ async function overpass(q) {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": UA },
         body: "data=" + encodeURIComponent(q),
-        signal: AbortSignal.timeout(60000),
+        signal: AbortSignal.timeout(45000),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
@@ -62,48 +62,48 @@ async function main() {
   const geocache = JSON.parse(fs.readFileSync(GEOCACHE, "utf8"));
   let found = {};
   try { found = JSON.parse(fs.readFileSync(OUT, "utf8")); } catch (e) { found = {}; }
-  let changed = false;
 
+  // Alle noch offenen Beiträge sammeln und in einer einzigen Overpass-Anfrage suchen
+  const todo = [];
   for (const file of fs.readdirSync(POSTS).filter((f) => f.endsWith(".md"))) {
     const key = path.basename(file, ".md");
     const data = matter(fs.readFileSync(path.join(POSTS, file), "utf8")).data;
     if (!data.campingplatz || !data.ort || data.koordinaten || found[key]) continue;
     const c = geocache[data.ort];
     if (!c) { console.warn(`Keine Koordinaten für "${data.ort}" (${file})`); continue; }
+    todo.push({ key, data, c });
+  }
+  if (!todo.length) { console.log("Keine offenen Campingplätze."); return; }
 
-    console.log(`Suche "${data.campingplatz}" um ${data.ort}`);
-    let json;
-    for (let attempt = 1; attempt <= 3 && !json; attempt++) {
-      try {
-        json = await overpass(`[out:json][timeout:40];nwr["tourism"="camp_site"](around:${RADIUS_M},${c.lat},${c.lon});out center tags;`);
-      } catch (e) {
-        console.warn(`  Versuch ${attempt} fehlgeschlagen: ${e.message}`);
-        if (attempt < 3) await new Promise((r) => setTimeout(r, 15000 * attempt));
-      }
+  const parts = todo.map(({ c }) => `nwr["tourism"="camp_site"](around:${RADIUS_M},${c.lat},${c.lon});`).join("");
+  console.log(`Suche ${todo.length} Campingplätze in einer Anfrage`);
+  let json;
+  for (let attempt = 1; attempt <= 3 && !json; attempt++) {
+    try {
+      json = await overpass(`[out:json][timeout:50];(${parts});out center tags;`);
+    } catch (e) {
+      console.warn(`  Versuch ${attempt} fehlgeschlagen: ${e.message}`);
+      if (attempt < 3) await new Promise((r) => setTimeout(r, 20000));
     }
-    if (!json) continue;
+  }
+  if (!json) return;
 
-    const candidates = json.elements
-      .map((el) => {
-        const pos = el.type === "node" ? { lat: el.lat, lon: el.lon } : el.center;
-        if (!pos) return null;
-        const name = (el.tags && el.tags.name) || "";
-        return {
-          name,
-          lat: Math.round(pos.lat * 1e5) / 1e5,
-          lon: Math.round(pos.lon * 1e5) / 1e5,
-          osm: `${el.type}/${el.id}`,
-          km: Math.round(distanceKm(c, pos) * 10) / 10,
-          score: Math.round(similarity(data.campingplatz, name) * 100) / 100,
-        };
-      })
-      .filter(Boolean);
+  const all = json.elements
+    .map((el) => {
+      const pos = el.type === "node" ? { lat: el.lat, lon: el.lon } : el.center;
+      return pos ? { name: (el.tags && el.tags.name) || "", lat: Math.round(pos.lat * 1e5) / 1e5, lon: Math.round(pos.lon * 1e5) / 1e5, osm: `${el.type}/${el.id}` } : null;
+    })
+    .filter(Boolean);
 
+  for (const { key, data, c } of todo) {
+    const candidates = all
+      .map((x) => ({ ...x, km: Math.round(distanceKm(c, x) * 10) / 10, score: Math.round(similarity(data.campingplatz, x.name) * 100) / 100 }))
+      .filter((x) => x.km <= RADIUS_M / 1000);
     // Bester Namenstreffer; ohne brauchbaren Namen der nächstgelegene Platz (als unsicher markiert)
     const byName = candidates.filter((x) => x.score >= 0.5).sort((a, b) => b.score - a.score || a.km - b.km);
     const nearest = candidates.slice().sort((a, b) => a.km - b.km);
     const pick = byName[0] || nearest[0];
-    if (!pick) { console.warn("  Kein Campingplatz gefunden"); continue; }
+    if (!pick) { console.warn(`  ${data.campingplatz}: kein Campingplatz gefunden`); continue; }
     found[key] = {
       lat: pick.lat,
       lon: pick.lon,
@@ -113,11 +113,9 @@ async function main() {
       treffer: byName[0] ? "name" : "naechster",
       alternativen: nearest.filter((x) => x.osm !== pick.osm).slice(0, 3).map((x) => `${x.name || "(ohne Namen)"} (${x.km} km)`),
     };
-    changed = true;
-    console.log(`  -> ${pick.name || "(ohne Namen)"}, ${pick.km} km vom Ort, Treffer: ${found[key].treffer}`);
-    await new Promise((r) => setTimeout(r, 6000));
+    console.log(`  ${data.campingplatz} -> ${pick.name || "(ohne Namen)"}, ${pick.km} km vom Ort, Treffer: ${found[key].treffer}`);
   }
-  if (changed) fs.writeFileSync(OUT, JSON.stringify(found, null, 2) + "\n");
+  fs.writeFileSync(OUT, JSON.stringify(found, null, 2) + "\n");
 }
 
 main().catch((e) => {
