@@ -42,10 +42,14 @@ jobs:
       - name: Kartendaten für neue Campingplätze holen
         run: node scripts/fetch-osm.js
 
+      - name: Höhenstufen für die Übersichtskarte holen (nur einmal)
+        run: node scripts/fetch-relief.js
+
       - name: Übersetzungen und Kartendaten committen
         run: |
           git add src/en/posts src/_data/osm src/_data/geocache.json
           if [ -f src/_data/campsites.json ]; then git add src/_data/campsites.json; fi
+          if [ -f src/_data/relief.json ]; then git add src/_data/relief.json; fi
           if git diff --cached --quiet; then
             echo "Keine neuen Übersetzungen oder Kartendaten."
             exit 0
