@@ -1,0 +1,306 @@
+{
+ "quelle": "Natural Earth 10m Populated Places (gemeinfrei), ab 60 000 Einwohner, ohne Zürich",
+ "staedte": [
+  {
+   "de": "Mailand",
+   "en": "Milan",
+   "pop": 2945000,
+   "lon": 9.203,
+   "lat": 45.472
+  },
+  {
+   "de": "Turin",
+   "en": "Turin",
+   "pop": 1652000,
+   "lon": 7.668,
+   "lat": 45.072
+  },
+  {
+   "de": "München",
+   "en": "Munich",
+   "pop": 1275000,
+   "lon": 11.573,
+   "lat": 48.132
+  },
+  {
+   "de": "Genf",
+   "en": "Geneva",
+   "pop": 1240000,
+   "lon": 6.14,
+   "lat": 46.21
+  },
+  {
+   "de": "Basel",
+   "en": "Basel",
+   "pop": 830000,
+   "lon": 7.59,
+   "lat": 47.58
+  },
+  {
+   "de": "Genua",
+   "en": "Genoa",
+   "pop": 647497,
+   "lon": 8.93,
+   "lat": 44.41
+  },
+  {
+   "de": "Bologna",
+   "en": "Bologna",
+   "pop": 488172,
+   "lon": 11.34,
+   "lat": 44.5
+  },
+  {
+   "de": "Strassburg",
+   "en": "Strasbourg",
+   "pop": 439972,
+   "lon": 7.75,
+   "lat": 48.58
+  },
+  {
+   "de": "Grenoble",
+   "en": "Grenoble",
+   "pop": 388574,
+   "lon": 5.72,
+   "lat": 45.18
+  },
+  {
+   "de": "Augsburg",
+   "en": "Augsburg",
+   "pop": 358989,
+   "lon": 10.9,
+   "lat": 48.35
+  },
+  {
+   "de": "Linz",
+   "en": "Linz",
+   "pop": 349161,
+   "lon": 14.289,
+   "lat": 48.319
+  },
+  {
+   "de": "Verona",
+   "en": "Verona",
+   "pop": 347459,
+   "lon": 10.99,
+   "lat": 45.44
+  },
+  {
+   "de": "Bern",
+   "en": "Bern",
+   "pop": 275329,
+   "lon": 7.467,
+   "lat": 46.917
+  },
+  {
+   "de": "Venedig",
+   "en": "Venice",
+   "pop": 270816,
+   "lon": 12.335,
+   "lat": 45.439
+  },
+  {
+   "de": "Lausanne",
+   "en": "Lausanne",
+   "pop": 265702,
+   "lon": 6.65,
+   "lat": 46.53
+  },
+  {
+   "de": "Freiburg",
+   "en": "Freiburg",
+   "pop": 254889,
+   "lon": 7.87,
+   "lat": 48
+  },
+  {
+   "de": "Como",
+   "en": "Como",
+   "pop": 250000,
+   "lon": 9.08,
+   "lat": 45.81
+  },
+  {
+   "de": "Luzern",
+   "en": "Lucerne",
+   "pop": 250000,
+   "lon": 8.28,
+   "lat": 47.05
+  },
+  {
+   "de": "Trieste",
+   "en": "Trieste",
+   "pop": 216035,
+   "lon": 13.8,
+   "lat": 45.65
+  },
+  {
+   "de": "Mülhausen",
+   "en": "Mulhouse",
+   "pop": 215454,
+   "lon": 7.35,
+   "lat": 47.75
+  },
+  {
+   "de": "Salzburg",
+   "en": "Salzburg",
+   "pop": 206279,
+   "lon": 13.04,
+   "lat": 47.81
+  },
+  {
+   "de": "Bergamo",
+   "en": "Bergamo",
+   "pop": 200000,
+   "lon": 9.67,
+   "lat": 45.7
+  },
+  {
+   "de": "Treviso",
+   "en": "Treviso",
+   "pop": 177309,
+   "lon": 12.24,
+   "lat": 45.67
+  },
+  {
+   "de": "Modena",
+   "en": "Modena",
+   "pop": 175502,
+   "lon": 10.92,
+   "lat": 44.65
+  },
+  {
+   "de": "Ulm",
+   "en": "Ulm",
+   "pop": 172955,
+   "lon": 10,
+   "lat": 48.4
+  },
+  {
+   "de": "Rijeka",
+   "en": "Rijeka",
+   "pop": 170992,
+   "lon": 14.45,
+   "lat": 45.33
+  },
+  {
+   "de": "Parma",
+   "en": "Parma",
+   "pop": 166011,
+   "lon": 10.32,
+   "lat": 44.81
+  },
+  {
+   "de": "Innsbruck",
+   "en": "Innsbruck",
+   "pop": 155214,
+   "lon": 11.41,
+   "lat": 47.28
+  },
+  {
+   "de": "Ravenna",
+   "en": "Ravenna",
+   "pop": 134631,
+   "lon": 12.22,
+   "lat": 44.42
+  },
+  {
+   "de": "Ferrara",
+   "en": "Ferrara",
+   "pop": 130992,
+   "lon": 11.61,
+   "lat": 44.85
+  },
+  {
+   "de": "Besançon",
+   "en": "Besançon",
+   "pop": 128426,
+   "lon": 6.03,
+   "lat": 47.23
+  },
+  {
+   "de": "Udine",
+   "en": "Udine",
+   "pop": 119009,
+   "lon": 13.24,
+   "lat": 46.07
+  },
+  {
+   "de": "Trient",
+   "en": "Trento",
+   "pop": 107808,
+   "lon": 11.12,
+   "lat": 46.08
+  },
+  {
+   "de": "Annecy",
+   "en": "Annecy",
+   "pop": 105749,
+   "lon": 6.117,
+   "lat": 45.9
+  },
+  {
+   "de": "Lugano",
+   "en": "Lugano",
+   "pop": 105388,
+   "lon": 8.967,
+   "lat": 46
+  },
+  {
+   "de": "Novara",
+   "en": "Novara",
+   "pop": 100910,
+   "lon": 8.62,
+   "lat": 45.45
+  },
+  {
+   "de": "Bozen",
+   "en": "Bolzano",
+   "pop": 95895,
+   "lon": 11.36,
+   "lat": 46.5
+  },
+  {
+   "de": "Rosenheim",
+   "en": "Rosenheim",
+   "pop": 92809,
+   "lon": 12.133,
+   "lat": 47.85
+  },
+  {
+   "de": "Klagenfurt",
+   "en": "Klagenfurt",
+   "pop": 90610,
+   "lon": 14.31,
+   "lat": 46.62
+  },
+  {
+   "de": "Biel",
+   "en": "Biel",
+   "pop": 78708,
+   "lon": 7.25,
+   "lat": 47.167
+  },
+  {
+   "de": "Asti",
+   "en": "Asti",
+   "pop": 71276,
+   "lon": 8.21,
+   "lat": 44.93
+  },
+  {
+   "de": "St. Gallen",
+   "en": "St. Gallen",
+   "pop": 70572,
+   "lon": 9.362,
+   "lat": 47.423
+  },
+  {
+   "de": "Pula",
+   "en": "Pula",
+   "pop": 61599,
+   "lon": 13.848,
+   "lat": 44.869
+  }
+ ]
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0 – 25-Oct-2026
+
+### Karte
+- Übersichtskarte mit Höhenstufen: Gebiete ab 1000 m und ab 2000 m als weiche, dunklere Papierflächen, damit Alpen und Jura erkennbar sind. Die Höhendaten (Terrain Tiles, AWS Open Data) holt die GitHub Action einmalig (`scripts/fetch-relief.js`) und legt sie in `src/_data/relief.json` ab.
+- Bis zu acht der grössten Städte im Ausschnitt (Natural Earth, `lib/staedte.json`) und bis zu sechs bekannte Gipfel. Beschriftungen, die einen Pin, Zürich, einen Ländernamen oder den Nordpfeil verdecken würden, entfallen. Auf dem Handy werden Städte und Gipfel ausgeblendet, damit die Karte lesbar bleibt.
+- Quellenhinweis um „Terrain Tiles“ ergänzt.
+
 ## 1.8.2 – 25-Oct-2026
 
 ### Campingplätze
