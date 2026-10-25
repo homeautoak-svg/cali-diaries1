@@ -1,6 +1,5 @@
 {%- set t = i18n[lang] %}
 {%- set trips = collections.trips_en if lang == "en" else collections.trips %}
-{%- set st = trips | tripStats %}
 <div class="page-intro">
   <h1>{{ t.campsitesTitle }}</h1>
   <p>{{ t.campsitesIntro }}</p>
@@ -45,7 +44,6 @@
 </table>
 </div>
 <p class="no-match" hidden>{{ t.noMatch }}</p>
-<p class="foot-note">{{ t.campsitesCount | replace("%p", st.campsites) | replace("%c", st.countries) }}</p>
 
 <script>
   // Filter nach Land (eins) und Merkmalen (mehrere, alle müssen passen)

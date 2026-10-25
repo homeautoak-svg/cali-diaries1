@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.2 – 25-Oct-2026
+
+### Campingplätze
+- Satz mit Anzahl Plätze und Länder unter der Liste entfernt.
+
 ## 1.8.1 – 25-Oct-2026
 
 ### Karte
