@@ -848,3 +848,16 @@ a.lang-option:focus-visible {
   .lb-bar { width: 100%; }
   .lb-hint { display: none; }
 }
+
+/* -------------------- Übersichtskarte (seit 1.8.0) -------------------- */
+
+.overview-map { border: 1px solid var(--nebel); border-radius: 12px; overflow: hidden; line-height: 0; background: #f4ecdd; }
+.overview-map svg { display: block; width: 100%; height: auto; }
+.overview-list { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.5rem 1rem; }
+.overview-list a { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0.6rem; border-radius: 10px; text-decoration: none; color: var(--rinde); transition: background 0.15s; }
+.overview-list li.hl a, .overview-list a:hover, .overview-list a:focus-visible { background: #fff; }
+.overview-list .nr { width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--lagerfeuer); color: #fff; font-weight: 700; font-size: 0.85rem; display: grid; place-items: center; flex-shrink: 0; transition: background 0.15s; }
+.overview-list li.hl .nr, .overview-list a:hover .nr { background: var(--tanne); }
+.overview-list .txt { display: flex; flex-direction: column; min-width: 0; }
+.overview-list b { font-family: var(--font-display); font-weight: 600; color: var(--tanne); }
+.overview-list small { color: var(--moos); font-size: 0.85rem; }

@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { default: Image, generateHTML } = require("@11ty/eleventy-img");
 const { resolveCoords } = require("./lib/lagekarte");
+const { renderOverview } = require("./lib/uebersichtskarte");
 
 // Responsive Bilder: Alle <img src="/images/..."> und og:image-Tags im fertigen
 // HTML werden beim Build durch verkleinerte WebP-Versionen mit srcset ersetzt.
@@ -153,6 +154,33 @@ module.exports = function (eleventyConfig) {
     const h = Math.floor(m / 60);
     const rest = m % 60;
     return h ? `${h} h${rest ? " " + rest + " min" : ""}` : `${rest} min`;
+  });
+
+  // Gemalte Übersichtskarte (seit 1.8.0): Trips chronologisch nummeriert, Start in Zürich
+  eleventyConfig.addFilter("uebersichtskarte", (orte, lang) => {
+    const MONATE = lang === "en"
+      ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      : ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+    const trips = (orte || [])
+      .slice()
+      .sort((a, b) => (a.datumSort || "").localeCompare(b.datumSort || ""))
+      .map((o, i) => ({
+        nr: i + 1,
+        name: o.name,
+        ort: o.ort,
+        url: o.url,
+        datum: o.datumSort ? `${MONATE[Number(o.datumSort.slice(5, 7)) - 1]} ${o.datumSort.slice(0, 4)}` : "",
+        lat: o.lat,
+        lon: o.lon,
+      }));
+    if (!trips.length) return { svg: "", trips };
+    const svg = renderOverview({
+      trips,
+      start: { name: "Zürich", lat: 47.3769, lon: 8.5417 },
+      lang,
+      ariaLabel: lang === "en" ? "Map of all our campsites" : "Karte aller unserer Campingplätze",
+    });
+    return { svg, trips };
   });
 
   // -------------------- Merkmale (Ausstattungs-Tags) --------------------
@@ -351,7 +379,9 @@ module.exports = function (eleventyConfig) {
           titel: post.data.title,
           url: post.url,
           ort: ortName,
+          name: post.data.campingplatz || ortName,
           datum: datumLang(post.data.datum, lang),
+          datumSort: post.data.datum_sort ? new Date(post.data.datum_sort).toISOString().slice(0, 10) : "",
           lat: coords.lat,
           lon: coords.lon,
         });

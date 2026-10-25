@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.0 – 25-Oct-2026
+
+### Karte
+- Die Seite „Karte“ (`/karte/`, `/en/map/`) zeigt statt Leaflet eine gemalte Übersichtskarte im Stil der Lagekarten: Seen, Landesgrenzen, Ländernamen, nummerierte Pins in zeitlicher Reihenfolge und gestrichelte Linien ab Zürich. Der Ausschnitt passt sich automatisch an alle Trips an.
+- Unter der Karte eine nummerierte Liste mit Campingplatz, Ort und Monat. Pins und Einträge verlinken zum Bericht und heben sich gegenseitig hervor; auf dem Handy sind die Pins grösser.
+- Grosse Seen, an denen wir waren (z.B. Bodensee, Lago Maggiore), in der genaueren Form aus den OpenStreetMap-Daten der Beiträge; übrige Seen und Grenzen aus Natural Earth.
+- Leaflet wird im Blog nicht mehr geladen. Hineinzoomen ist auf der Übersicht nicht mehr möglich.
+- Renderer in `lib/uebersichtskarte.js`.
+
 ## 1.7.4 – 24-Oct-2026
 
 ### Beiträge
