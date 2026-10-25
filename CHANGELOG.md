@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.1 – 25-Oct-2026
+
+### Karte
+- In der Liste unter der Übersichtskarte stehen die Nummern in denselben Pins wie auf der Karte statt in Kreisen.
+- Karte und Liste stehen gemeinsam in einem Rahmen.
+
+### Navigation
+- Sprachumschalter ohne Länderflaggen und kleiner.
+
 ## 1.8.0 – 25-Oct-2026
 
 ### Karte

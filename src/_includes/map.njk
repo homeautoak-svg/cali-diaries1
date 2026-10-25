@@ -3,18 +3,20 @@
 <h1 class="page-title">{{ mapHeading }}</h1>
 
 {% if karte.svg %}
+<div class="overview-card">
 <div class="overview-map">{{ karte.svg | safe }}</div>
 
 <ol class="overview-list">
   {%- for t in karte.trips %}
   <li data-nr="{{ t.nr }}">
     <a href="{{ t.url }}">
-      <span class="nr">{{ t.nr }}</span>
+      <span class="nr"><svg viewBox="-14 -41 28 44" aria-hidden="true"><path d="M0 0c-10-14-13-19-13-26a13 13 0 0 1 26 0c0 7-3 12-13 26z"/><text y="-21.5" text-anchor="middle">{{ t.nr }}</text></svg></span>
       <span class="txt"><b>{{ t.name }}</b><small>{{ t.ort }} · {{ t.datum }}</small></span>
     </a>
   </li>
   {%- endfor %}
 </ol>
+</div>
 
 <script>
   // Pin und Listeneintrag gegenseitig hervorheben

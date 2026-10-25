@@ -586,7 +586,7 @@ main > h1 {
 }
 
 .site-header--compact {
-  padding-right: 9.5rem; /* Platz für den Sprachumschalter */
+  padding-right: 7rem; /* Platz für den Sprachumschalter */
 }
 
 .lang-switch {
@@ -594,12 +594,12 @@ main > h1 {
   top: 0.85rem;
   right: 1rem;
   display: inline-flex;
-  gap: 0.25rem;
-  padding: 0.2rem;
+  gap: 0.1rem;
+  padding: 0.15rem;
   border: 1px solid rgba(244, 236, 221, 0.3);
   border-radius: 999px;
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
@@ -612,8 +612,7 @@ main > h1 {
 .lang-option {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.6rem 0.25rem 0.35rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 999px;
   color: var(--birke);
   text-decoration: none;
@@ -628,14 +627,6 @@ a.lang-option:focus-visible {
 .lang-option.is-current {
   background: var(--birke);
   color: var(--tanne);
-}
-
-.lang-option .flag {
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 50%;
-  flex: none;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 34rem) {
@@ -851,13 +842,17 @@ a.lang-option:focus-visible {
 
 /* -------------------- Übersichtskarte (seit 1.8.0) -------------------- */
 
-.overview-map { border: 1px solid var(--nebel); border-radius: 12px; overflow: hidden; line-height: 0; background: #f4ecdd; }
+.overview-card { border: 1px solid var(--nebel); border-radius: 14px; overflow: hidden; background: #f4ecdd; }
+.overview-map { line-height: 0; border-bottom: 1px solid var(--nebel); }
 .overview-map svg { display: block; width: 100%; height: auto; }
-.overview-list { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.5rem 1rem; }
+.overview-list { list-style: none; margin: 0; padding: 0.9rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.5rem 1rem; }
 .overview-list a { display: flex; align-items: center; gap: 0.7rem; padding: 0.5rem 0.6rem; border-radius: 10px; text-decoration: none; color: var(--rinde); transition: background 0.15s; }
-.overview-list li.hl a, .overview-list a:hover, .overview-list a:focus-visible { background: #fff; }
-.overview-list .nr { width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--lagerfeuer); color: #fff; font-weight: 700; font-size: 0.85rem; display: grid; place-items: center; flex-shrink: 0; transition: background 0.15s; }
-.overview-list li.hl .nr, .overview-list a:hover .nr { background: var(--tanne); }
+.overview-list li.hl a, .overview-list a:hover, .overview-list a:focus-visible { background: rgba(255, 255, 255, 0.7); }
+.overview-list .nr { width: 1.6rem; height: 2.5rem; flex-shrink: 0; }
+.overview-list .nr svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.overview-list .nr path { fill: #c98a3b; stroke: #8f5a1c; stroke-width: 1.6; transition: fill 0.15s, stroke 0.15s; }
+.overview-list .nr text { font-family: var(--font-body); font-size: 11px; font-weight: 700; fill: #fff; }
+.overview-list li.hl .nr path, .overview-list a:hover .nr path, .overview-list a:focus-visible .nr path { fill: #1f3a2e; stroke: #1f3a2e; }
 .overview-list .txt { display: flex; flex-direction: column; min-width: 0; }
 .overview-list b { font-family: var(--font-display); font-weight: 600; color: var(--tanne); }
 .overview-list small { color: var(--moos); font-size: 0.85rem; }
